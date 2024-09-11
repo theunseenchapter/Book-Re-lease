@@ -1,0 +1,84 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('giammarco-boscaro-zeH-ljawHtg-unsplash.jpg'); /* Update the path to your image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #333333; /* Dark Charcoal */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: rgba(0, 51, 102, 0.8); /* Deep Blue with transparency */
+    color: #FFFFFF;
+    text-align: center;
+    padding: 1em 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+#login, #signup { /* Apply the same styles for both login and signup */
+    background-color: rgba(255, 255, 255, 0.9); /* White with transparency */
+    border: 1px solid #339966; /* Rich Green */
+    border-radius: 8px;
+    padding: 2em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#login h2, #signup h2 {
+    color: #003366; /* Deep Blue */
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    background-color: #339966; /* Rich Green */
+    color: #FFFFFF;
+    border: none;
+    padding: 0.75em 1.5em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #287756; /* Darker shade of Rich Green */
+}
+
+p {
+    margin: 1em 0 0;
+}
+
+a {
+    color: #FF6F61; /* Soft Coral, or any bright color you prefer */
+    text-decoration: none;
+    font-weight: bold; /* Makes the text bolder */
+    transition: color 0.3s, text-shadow 0.3s; 
+}
+
+a:hover {
+    color: #FF4500; /* Brighter shade or different color on hover */
+    text-shadow: 0 0 5px rgba(255, 69, 0, 0.7); 
+}
