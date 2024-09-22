@@ -27,23 +27,21 @@ router.get('/profile', (req, res) => {
 router.post('/login', (req, res) => {
     const { erpId, password } = req.body;
 
-    // Path to student.json
-    const filePath = path.join(__dirname, '../data/student.json');
 
-    // Read the student.json file
+    const filePath = '../data/student.json';
+
+
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading student.json', err);
             return res.status(500).json({ success: false, message: 'Server error' });
         }
 
-        // Parse the JSON data
+    
         const students = JSON.parse(data);
 
-        // Find the student with matching ERP ID (erp_no in JSON)
         const student = students.find(stud => stud.erp_no === parseInt(erpId));
 
-        // Check if student exists and password matches
         if (student && student.Password === parseInt(password)) {
             res.json({ success: true, userId: student.erp_no });
         } else {
