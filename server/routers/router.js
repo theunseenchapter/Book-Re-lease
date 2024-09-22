@@ -7,7 +7,7 @@ const userController = require("../controller/userController");
 router.get("/something", (req, res) =>{
     res.send("hello world!")
 })
-
+// .render 
 
 
 
