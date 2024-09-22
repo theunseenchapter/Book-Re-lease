@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index1.css">
+</head>
+<body>
+    <header>
+        <h1>Book Re-Lease</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="browse.html">Browse Books</a></li>
+                <li><a href="#post">Post Your Book</a></li>
+                <li><a href="#records">Profile</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-info">
+                <h2>User Information</h2>
+                <div class="profile-item">
+                    <h3>Name: <span id="userName"></span></h3>
+                </div>
+                <div class="profile-item">
+                    <h3>Class: <span id="userClass"></span></h3>
+                </div>
+                <div class="profile-item">
+                    <h3>College Year: <span id="userCollegeYear"></span></h3>
+                </div>
+                <div class="profile-item">
+                    <h3>Roll No: <span id="userRollNo"></span></h3>
+                </div>
+                <div class="profile-item">
+                    <h3>Email: <span id="userEmail"></span></h3>
+                </div>
+                <div class="profile-item">
+                    <h3>Phone No: <span id="userPhone"></span></h3>
+                </div>
+            </div>
+            <div class="published-books">
+                <h2>Published Books</h2>
+                <div id="publishedBooks"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiUrl = 'http://localhost:3000';
+
+        // Fetch user data
+        fetch(`${apiUrl}/user-profile`, {
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('userName').textContent = data.name;
+            document.getElementById('userClass').textContent = data.class;
+            document.getElementById('userCollegeYear').textContent = data.collegeYear; // Add this line
+            document.getElementById('userRollNo').textContent = data.rollNo;
+            document.getElementById('userEmail').textContent = data.email;
+            document.getElementById('userPhone').textContent = data.phone;
+            displayPublishedBooks(data.books);
+        })
+        .catch(error => console.error('Error:', error));
+
+        // Function to display published books
+        function displayPublishedBooks(books) {
+            const publishedBooksDiv = document.getElementById('publishedBooks');
+            if (books.length === 0) {
+                publishedBooksDiv.innerHTML = '<p>No books published.</p>';
+            } else {
+                books.forEach(book => {
+                    const bookItem = document.createElement('div');
+                    bookItem.className = 'book-item';
+                    bookItem.innerHTML = `
+                        <h4>${book.title}</h4>
+                        <p>Author: ${book.author}</p>
+                        <p>Type: ${book.type}</p>
+                        <p>Price: $${book.price}</p>
+                    `;
+                    publishedBooksDiv.appendChild(bookItem);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

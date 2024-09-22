@@ -1,33 +1,61 @@
 const express = require("express");
 const path = require("path"); // Require the path module
 const router = express.Router();
-const userController = require("../controller/userController");
-const studentController = require('../controller/studentController'); // Adjust the path if necessary
+const fs = require('fs');
 
-router.get("/something", (req, res) =>{
-    res.send("hello world!")
-})
-// Route to serve login.html
+// Serve login.html
 router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/login.html'));
 });
 
-// Route to serve index.html
+// Serve index.html
 router.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// Route to serve browse.html
+// Serve browse.html
 router.get('/browse', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/browse.html'));
 });
 
-// Route to serve profile.html
+// Serve profile.html
 router.get('/profile', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/profile.html'));
 });
 
+// Login route for checking student ERP and password from student.json
+router.post('/login', (req, res) => {
+    const { erpId, password } = req.body;
+
+    // Path to student.json
+    const filePath = path.join(__dirname, '../data/student.json');
+
+    // Read the student.json file
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading student.json', err);
+            return res.status(500).json({ success: false, message: 'Server error' });
+        }
+
+        // Parse the JSON data
+        const students = JSON.parse(data);
+
+        // Find the student with matching ERP ID (erp_no in JSON)
+        const student = students.find(stud => stud.erp_no === parseInt(erpId));
+
+        // Check if student exists and password matches
+        if (student && student.Password === parseInt(password)) {
+            res.json({ success: true, userId: student.erp_no });
+        } else {
+            res.json({ success: false, message: 'Invalid ERP ID or password' });
+        }
+    });
+});
+
 // Add student data route
-router.post('/add-studenterp', studentController.addMultipleStudents);
+router.post('/add-studenterp', (req, res) => {
+    // Add your logic here for adding student ERP
+    res.send("Add student ERP functionality not implemented yet.");
+});
 
 module.exports = router;

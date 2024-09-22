@@ -105,3 +105,17 @@ header h1 {
         padding: 1.5rem;
     }
 }
+    /* Simple styling for password input and eye icon */
+    .password-container {
+        position: relative;
+    }
+    .password-container input {
+        width: 100%;
+        padding-right: 30px; /* Space for the eye icon */
+    }
+    .password-container i {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-60%);
+    }
