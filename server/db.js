@@ -1,21 +1,16 @@
-const {MongoClient} = require("mongodb")
-
-const dotenv = require("dotenv")
+const { MongoClient } = require("mongodb");
+const dotenv = require("dotenv");
 dotenv.config();
 
-const client = new MongoClient(process.env.CONNECTIONSTRING , {
+const client = new MongoClient(process.env.CONNECTIONSTRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-})
+});
 
-
-async function start(){
+async function start() {
     await client.connect();
-    module.exports = client.db("BookRe-release")
-
-    console.log("Connected")
-    const app = require("./app")
-    // app.listen(process.env.PORT)
+    console.log("Connected to MongoDB");
+    return client.db("BookRe-release"); // Return the database instance
 }
 
-start()
+module.exports = start(); // Call start and export the promise
