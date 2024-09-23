@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Book Re-Lease</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="/browse">Browse Books</a></li>
+                <li><a href="/index">Post Your Book</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/login" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="split-container">
+            <section id="post" class="half-page center">
+                <h2>Post Your Book</h2>
+                <form id="postBookForm">
+                    <input type="text" id="bookTitle" placeholder="Book Title" required>
+                    <input type="text" id="bookAuthor" placeholder="Author" required>
+                    <select id="bookType">
+                        <option value="sell">Sell</option>
+                        <option value="rent">Rent</option>
+                    </select>
+                    <input type="number" id="bookPrice" placeholder="Price" required>
+                    <input type="file" id="bookPhoto" accept="image/*" required>
+                    <button class="short" type="submit">Post Book</button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const apiUrl = '/';
+
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', function(e) {
+            e.preventDefault();
+            fetch('/logout', {
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/login';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Event listener for posting a new book
+        document.getElementById('postBookForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newBook = {
+                title: document.getElementById('bookTitle').value.trim(),
+                author: document.getElementById('bookAuthor').value.trim(),
+                type: document.getElementById('bookType').value,
+                price: parseFloat(document.getElementById('bookPrice').value)
+            };
+
+            const formData = new FormData();
+            formData.append('title', newBook.title);
+            formData.append('author', newBook.author);
+            formData.append('type', newBook.type);
+            formData.append('price', newBook.price);
+            formData.append('photo', document.getElementById('bookPhoto').files[0]);
+
+            fetch(`${apiUrl}/post`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || 'Book posted successfully');
+                document.getElementById('postBookForm').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>

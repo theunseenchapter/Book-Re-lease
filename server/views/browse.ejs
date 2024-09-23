@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Books</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="browse.css">
+</head>
+<body>
+    <header>
+        <h1>Book Re-Lease</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="browse.html">Browse Books</a></li>
+                <li><a href="index.html">Post Your Book</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.html" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for books..." />
+            <button id="searchButton">Search</button>
+        </div>
+        <section id="books-dashboard">
+            <h2>Books Available</h2>
+            <div id="booksList"></div>
+        </section>
+    </div>
+
+    <script>
+        const apiUrl = 'http://localhost:3000';
+
+        // Function to load books
+        function loadBooks(query = '') {
+            fetch(`${apiUrl}/search?query=${encodeURIComponent(query)}`, {
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayBooks(data);
+            })
+            .catch(error => {
+                console.error('Error fetching books:', error);
+                document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again later.</p>';
+            });
+        }
+
+        // Function to display books
+        function displayBooks(books) {
+            const booksDiv = document.getElementById('booksList');
+            booksDiv.innerHTML = ''; // Clear previous books
+            if (books.length === 0) {
+                booksDiv.innerHTML = '<p>No books available.</p>';
+            } else {
+                books.forEach(book => {
+                    const bookItem = document.createElement('div');
+                    bookItem.className = 'book-item';
+                    bookItem.innerHTML = `
+                        <h3>${book.title}</h3>
+                        <p>Author: ${book.author}</p>
+                        <p>Type: ${book.type}</p>
+                        <p>Price: $${book.price}</p>
+                        ${book.book_image ? `<img src="${apiUrl}/uploads/${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
+                        <button class="book-btn" data-book-id="${book.id}">Book Your Book</button>
+                    `;
+                    booksDiv.appendChild(bookItem);
+                });
+            }
+        }
+
+        // Load books when the page loads
+        window.onload = () => loadBooks();
+
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', function(e) {
+            e.preventDefault();
+            fetch(`${apiUrl}/logout`, {
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '../views/login.html'; // Redirect to login page
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Event listener for search
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const query = document.getElementById('searchInput').value.trim();
+            loadBooks(query); // Load books with the search query
+        });
+    </script>
+</body>
+</html>

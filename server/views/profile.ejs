@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index1.css">
+</head>
+<body>
+    <header>
+        <h1>Book Re-Lease</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="/browse">Browse Books</a></li>
+                <li><a href="/index">Post Your Book</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/login" id="logout">Logout</a></li>
+            </ul>
+        </nav> 
+    </header>
+    
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-info">
+                <h2>User Information</h2>
+                <div class="profile-item">
+                    <h3>Name: <span><%= user.Name %></span></h3> <!-- Matches "Name" -->
+                </div>
+                <div class="profile-item">
+                    <h3>Class: <span><%= user.class %></span></h3> <!-- Matches "class" -->
+                </div>
+                <div class="profile-item">
+                    <h3>College Year: <span><%= user.college_year %></span></h3> <!-- Matches "college_year" -->
+                </div>
+                <div class="profile-item">
+                    <h3>Roll No: <span><%= user.rollNo %></span></h3> <!-- Matches "rollNo" -->
+                </div>
+                <div class="profile-item">
+                    <h3>Email: <span><%= user.email %></span></h3> <!-- Matches "email" -->
+                </div>
+                <div class="profile-item">
+                    <h3>Phone No: <span><%= user.phone_no %></span></h3> <!-- Matches "phone_no" -->
+                </div>
+            </div>
+            <div class="published-books">
+                <h2>Published Books</h2>
+                <div id="publishedBooks">
+                    <% if (!user.books || user.books.length === 0) { %>
+                        <p>No books published.</p>
+                    <% } else { %>
+                        <% user.books.forEach(function(book) { %>
+                            <div class="book-item">
+                                <h4><%= book.title %></h4>
+                                <p>Author: <%= book.author %></p>
+                                <p>Type: <%= book.type %></p>
+                                <p>Price: $<%= book.price %></p>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

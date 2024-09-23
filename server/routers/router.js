@@ -1,35 +1,29 @@
 const express = require("express");
-const path = require("path"); // Require the path module
+const path = require("path");
 const router = express.Router();
 const fs = require('fs');
+const jwt = require("jsonwebtoken");
 
-// Serve login.html
+// Serve login.ejs
 router.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/login.html'));
+    res.render('login');
 });
 
-// Serve index.html
+// Serve index.ejs
 router.get('/index', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+    res.render('index');
 });
 
-// Serve browse.html
+// Serve browse.ejs
 router.get('/browse', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/browse.html'));
+    res.render('browse');
 });
 
-// Serve profile.html
+// Serve profile.ejs with user data from student.json
 router.get('/profile', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/profile.html'));
-});
-
-// Login route for checking student ERP and password from student.json
-router.post('/login', (req, res) => {
-    const { erpId, password } = req.body;
-
-
-    const filePath = '../data/student.json';
-
+    // Note: Authentication should already be handled in the app.js
+    const userId = req.user.userId; // userId set in authenticateJWT
+    const filePath = path.join(__dirname, '../data/student.json'); // Adjusted file path
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -37,23 +31,39 @@ router.post('/login', (req, res) => {
             return res.status(500).json({ success: false, message: 'Server error' });
         }
 
-    
         const students = JSON.parse(data);
+        const user = students.find(stud => stud.erp_no === userId);
 
-        const student = students.find(stud => stud.erp_no === parseInt(erpId));
-
-        if (student && student.Password === parseInt(password)) {
-            res.json({ success: true, userId: student.erp_no });
+        if (user) {
+            res.render('profile', { user }); // Pass user data to profile.ejs
         } else {
-            res.json({ success: false, message: 'Invalid ERP ID or password' });
+            res.status(404).json({ success: false, message: 'User not found' });
         }
     });
 });
 
-// Add student data route
-router.post('/add-studenterp', (req, res) => {
-    // Add your logic here for adding student ERP
-    res.send("Add student ERP functionality not implemented yet.");
+// Login route for checking student ERP and password
+router.post('/login', (req, res) => {
+    const { erpId, password } = req.body;
+    const filePath = path.join(__dirname, '../data/student.json');
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading student.json', err);
+            return res.status(500).json({ success: false, message: 'Server error' });
+        }
+
+        const students = JSON.parse(data);
+        const student = students.find(stud => stud.erp_no === parseInt(erpId));
+
+        // Check if student exists and password matches
+        if (student && student.Password === parseInt(password)) {
+            const token = jwt.sign({ userId: student.erp_no }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            res.json({ success: true, token }); // Send the token to the client
+        } else {
+            res.json({ success: false, message: 'Invalid ERP ID or password' });
+        }
+    });
 });
 
 module.exports = router;

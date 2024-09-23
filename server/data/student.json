@@ -1,0 +1,934 @@
+[{
+
+  "erp_no": 12345678,
+  "Password": 123456,
+  "Name": "ANANYA BHAGWANDEEN SHARMA",
+  "dob": {
+    "$date": "1995-08-15T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "1234567890",
+  "email": "ananya@example.com",
+  "address": "123 Main St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 1,
+  "aadhar_card_no": "123456789012"
+  
+},
+{
+  "erp_no": 220600310,
+  "Password": 554837,
+  "Name": "ANJALI RAMVILASH YADAV",
+  "dob": {
+    "$date": "1998-03-22T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "half",
+  "academic_status": "Eligible",
+  "phone_no": "9876543210",
+  "email": "anjali@example.com",
+  "address": "456 Oak St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 2,
+  "aadhar_card_no": "234567890123"
+},
+{
+
+  "erp_no": 220600289,
+  "Password": 238420,
+  "Name": "APOORVA BASANT RAJPUT",
+  "dob": {
+    "$date": "1997-11-10T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "7890123456",
+  "email": "apoorva@example.com",
+  "address": "789 Pine St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 3,
+  "aadhar_card_no": "345678901234"
+},
+{
+  "erp_no": 220600023,
+  "Password": 211688,
+  "Name": "BHAGYASHREE RAJENDRA BAGAL",
+  "dob": {
+    "$date": "1996-06-05T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "pending",
+  "academic_status": "Eligible",
+  "phone_no": "3456789012",
+  "email": "bhagyashree@example.com",
+  "address": "012 Cedar St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 4,
+  "aadhar_card_no": "456789012345"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae800"
+  },
+  "erp_no": 220600269,
+  "Password": 763592,
+  "Name": "DEBDUTTA VIVEKANANDA MAJUMDAR",
+  "dob": {
+    "$date": "1994-09-30T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "pending",
+  "academic_status": "Dropout",
+  "phone_no": "5678901234",
+  "email": "deb@example.com",
+  "address": "901 Elm St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 5,
+  "aadhar_card_no": "567890123456"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae801"
+  },
+  "erp_no": 220600309,
+  "Password": 88516,
+  "Name": "JAGRUTI DINESH WAGHULDE",
+  "dob": {
+    "$date": "1999-01-12T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "6789012345",
+  "email": "jagruti@example.com",
+  "address": "234 Birch St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 6,
+  "aadhar_card_no": "678901234567"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae802"
+  },
+  "erp_no": 220600313,
+  "Password": 286852,
+  "Name": "KARISHMA BASANTLAL YADAV",
+  "dob": {
+    "$date": "1993-12-18T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Dropout",
+  "phone_no": "7890123456",
+  "email": "karishma@example.com",
+  "address": "567 Maple St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 7,
+  "aadhar_card_no": "789012345678"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae803"
+  },
+  "erp_no": 220600372,
+  "Password": 468094,
+  "Name": "KRISHA RAJESH GAONKAR",
+  "dob": {
+    "$date": "1992-04-25T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "half",
+  "academic_status": "Eligible",
+  "phone_no": "8901234567",
+  "email": "krisha@example.com",
+  "address": "678 Oak St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 8,
+  "aadhar_card_no": "890123456789"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae804"
+  },
+  "erp_no": 220600268,
+  "Password": 892291,
+  "Name": "LAKSHMI JAI PRAKASH RAI",
+  "dob": {
+    "$date": "1996-07-28T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "pending",
+  "academic_status": "Eligible",
+  "phone_no": "9012345678",
+  "email": "lakshmi@example.com",
+  "address": "789 Pine St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 9,
+  "aadhar_card_no": "901234567890"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae805"
+  },
+  "erp_no": 220600293,
+  "Password": 163323,
+  "Name": "MANASI DINESH KUMAR SHARMA",
+  "dob": {
+    "$date": "1991-02-14T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "half",
+  "academic_status": "Dropout",
+  "phone_no": "1234567890",
+  "email": "manasi@example.com",
+  "address": "123 Cedar St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 10,
+  "aadhar_card_no": "012345678901"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae806"
+  },
+  "erp_no": 220600264,
+  "Password": 936910,
+  "Name": "MANSI SURESH KODAG",
+  "dob": {
+    "$date": "1990-05-07T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Dropout",
+  "phone_no": "2345678901",
+  "email": "mansi@example.com",
+  "address": "345 Birch St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 11,
+  "aadhar_card_no": "123456789012"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae807"
+  },
+  "erp_no": 220600077,
+  "Password": 893280,
+  "Name": "MONI GOVIND CHAURASIYA",
+  "dob": {
+    "$date": "1998-11-23T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "pending",
+  "academic_status": "Eligible",
+  "phone_no": "3456789012",
+  "email": "moni@example.com",
+  "address": "456 Elm St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 12,
+  "aadhar_card_no": "234567890123"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae808"
+  },
+  "erp_no": 220600287,
+  "Password": 830430,
+  "Name": "NANDINI SOMNATH PAWAR",
+  "dob": {
+    "$date": "1997-06-30T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "half",
+  "academic_status": "Dropout",
+  "phone_no": "4567890123",
+  "email": "nandini@example.com",
+  "address": "567 Main St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 13,
+  "aadhar_card_no": "345678901234"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae809"
+  },
+  "erp_no": 220600614,
+  "Password": 622055,
+  "Name": "PALAK PRASHANT SINGH",
+  "dob": {
+    "$date": "1996-09-14T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "5678901234",
+  "email": "palak@example.com",
+  "address": "678 Oak St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 14,
+  "aadhar_card_no": "456789012345"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae80a"
+  },
+  "erp_no": 220600304,
+  "Password": 574875,
+  "Name": "PRAGATI SHAILBINDER TIWARI",
+  "dob": {
+    "$date": "1999-03-27T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "half",
+  "academic_status": "Dropout",
+  "phone_no": "6789012345",
+  "email": "pragati@example.com",
+  "address": "789 Pine St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 15,
+  "aadhar_card_no": "567890123456"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae80b"
+  },
+  "erp_no": 220600332,
+  "Password": 417617,
+  "Name": "PRAJAKTA PRAMOD PATIL",
+  "dob": {
+    "$date": "1994-08-10T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "7890123456",
+  "email": "prajakta@example.com",
+  "address": "901 Elm St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 16,
+  "aadhar_card_no": "678901234567"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae80c"
+  },
+  "erp_no": 220600271,
+  "Password": 800097,
+  "Name": "RITU SUDHAKAR MARGAJ",
+  "dob": {
+    "$date": "1993-01-03T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "pending",
+  "academic_status": "Dropout",
+  "phone_no": "8901234567",
+  "email": "ritu@example.com",
+  "address": "012 Cedar St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 17,
+  "aadhar_card_no": "789012345678"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae80d"
+  },
+  "erp_no": 220600283,
+  "Password": 135995,
+  "Name": "RIYA SUDHIR PARTE",
+  "dob": {
+    "$date": "1992-04-18T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "half",
+  "academic_status": "Eligible",
+  "phone_no": "9012345678",
+  "email": "riya@example.com",
+  "address": "234 Birch St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 18,
+  "aadhar_card_no": "890123456789"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae80e"
+  },
+  "erp_no": 220600078,
+  "Password": 841546,
+  "Name": "SANCHI DILIP DESHMUKH",
+  "dob": {
+    "$date": "1995-10-09T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "half",
+  "academic_status": "Dropout",
+  "phone_no": "1234567890",
+  "email": "sanchi@example.com",
+  "address": "345 Maple St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 19,
+  "aadhar_card_no": "901234567890"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae80f"
+  },
+  "erp_no": 220600266,
+  "Password": 258571,
+  "Name": "SARITA SHIVRAM KORI",
+  "dob": {
+    "$date": "1990-02-05T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "2345678901",
+  "email": "sarita@example.com",
+  "address": "456 Oak St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 20,
+  "aadhar_card_no": "012345678901"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae810"
+  },
+  "erp_no": 220600263,
+  "Password": 357880,
+  "Name": "SHABINA MOHAMMAD SHAFIK KHAN",
+  "dob": {
+    "$date": "1991-07-20T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "half",
+  "academic_status": "Dropout",
+  "phone_no": "3456789012",
+  "email": "shabina@example.com",
+  "address": "567 Main St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 21,
+  "aadhar_card_no": "123456789012"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae811"
+  },
+  "erp_no": 220600003,
+  "Password": 580366,
+  "Name": "SHRIYA KAMLESH HARHARE",
+  "dob": {
+    "$date": "1996-12-17T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "pending",
+  "academic_status": "Eligible",
+  "phone_no": "4567890123",
+  "email": "shriya@example.com",
+  "address": "678 Pine St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 22,
+  "aadhar_card_no": "234567890123"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae812"
+  },
+  "erp_no": 220600296,
+  "Password": 190210,
+  "Name": "SHUKLA NIKKI DINESH DINESH SHUKLA SHUKLA",
+  "dob": {
+    "$date": "1998-08-28T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "6789012345",
+  "email": "nikki@example.com",
+  "address": "901 Cedar St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 23,
+  "aadhar_card_no": "456789012345"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae813"
+  },
+  "erp_no": 220600379,
+  "Password": 536929,
+  "Name": "SONAM ANILKUMAR YADAV",
+  "dob": {
+    "$date": "1993-11-11T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "pending",
+  "academic_status": "Dropout",
+  "phone_no": "7890123456",
+  "email": "sonam@example.com",
+  "address": "012 Oak St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 24,
+  "aadhar_card_no": "567890123456"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae814"
+  },
+  "erp_no": 220600249,
+  "Password": 897125,
+  "Name": "TANISHKA CHANDRASHEKHAR GHOLAP",
+  "dob": {
+    "$date": "1992-06-26T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "half",
+  "academic_status": "Eligible",
+  "phone_no": "8901234567",
+  "email": "tanishka@example.com",
+  "address": "123 Birch St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 25,
+  "aadhar_card_no": "678901234567"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae815"
+  },
+  "erp_no": 220600080,
+  "Password": 653034,
+  "Name": "YOGINI VASANT DHANOKAR",
+  "dob": {
+    "$date": "1991-03-09T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "fees_status": "paid",
+  "academic_status": "Dropout",
+  "phone_no": "9012345678",
+  "email": "yogini@example.com",
+  "address": "234 Pine St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 26,
+  "aadhar_card_no": "789012345678"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae816"
+  },
+  "erp_no": 220600284,
+  "Password": 703805,
+  "Name": "SHIVAM RAJEEV PATHAK",
+  "dob": {
+    "$date": "1997-10-22T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "pending",
+  "academic_status": "Eligible",
+  "phone_no": "0123456789",
+  "email": "shivam@example.com",
+  "address": "345 Main St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 27,
+  "aadhar_card_no": "890123456789"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae817"
+  },
+  "erp_no": 220600300,
+  "Password": 364358,
+  "Name": "AARYAN SUDHAKAR SINGHAL",
+  "dob": {
+    "$date": "1999-05-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "half",
+  "academic_status": "Dropout",
+  "phone_no": "1234567890",
+  "email": "aaryan@example.com",
+  "address": "456 Elm St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 28,
+  "aadhar_card_no": "901234567890"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae818"
+  },
+  "erp_no": 220600002,
+  "Password": 789247,
+  "Name": "LAKSHYA UMESH GUPTA",
+  "dob": {
+    "$date": "1998-09-12T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "pending",
+  "academic_status": "Eligible",
+  "phone_no": "1234567890",
+  "email": "lakshya@example.com",
+  "address": "123 Main St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 29,
+  "aadhar_card_no": "123456789012"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae819"
+  },
+  "erp_no": 220600258,
+  "Password": 245706,
+  "Name": "LALIT LAXMAN HADKAR",
+  "dob": {
+    "$date": "1997-03-22T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "half",
+  "academic_status": "Eligible",
+  "phone_no": "9876543210",
+  "email": "lalit@example.com",
+  "address": "456 Oak St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 30,
+  "aadhar_card_no": "234567890123"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae81a"
+  },
+  "erp_no": 220600351,
+  "Password": 463438,
+  "Name": "LOKESH ROSHANLAL GURJAR",
+  "dob": {
+    "$date": "1996-11-10T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "7890123456",
+  "email": "lokesh@example.com",
+  "address": "789 Pine St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 31,
+  "aadhar_card_no": "345678901234"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae81b"
+  },
+  "erp_no": 220600282,
+  "Password": 321774,
+  "Name": "MANDAR ASHOK PARAB",
+  "dob": {
+    "$date": "1995-06-05T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "pending",
+  "academic_status": "Eligible",
+  "phone_no": "3456789012",
+  "email": "mandar@example.com",
+  "address": "012 Cedar St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 32,
+  "aadhar_card_no": "456789012345"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae81c"
+  },
+  "erp_no": 220600267,
+  "Password": 848254,
+  "Name": "MANISH SHRIPRAKASH KUSHVAHA",
+  "dob": {
+    "$date": "1994-09-30T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "pending",
+  "academic_status": "Dropout",
+  "phone_no": "5678901234",
+  "email": "manish@example.com",
+  "address": "901 Elm St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 33,
+  "aadhar_card_no": "567890123456"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae81d"
+  },
+  "erp_no": 220600616,
+  "Password": 441983,
+  "Name": "MAYANK ARVIND SINGH",
+  "dob": {
+    "$date": "1999-01-12T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "6789012345",
+  "email": "mayank@example.com",
+  "address": "234 Birch St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 34,
+  "aadhar_card_no": "678901234567"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae81e"
+  },
+  "erp_no": 220600272,
+  "Password": 351482,
+  "Name": "MD AMAN MD SHAKIL AHMAD AHMAD",
+  "dob": {
+    "$date": "1993-12-18T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "paid",
+  "academic_status": "Dropout",
+  "phone_no": "7890123456",
+  "email": "aman@example.com",
+  "address": "567 Maple St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 35,
+  "aadhar_card_no": "789012345678"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae81f"
+  },
+  "erp_no": 220600262,
+  "Password": 635565,
+  "Name": "MOHAMMAD HASAN IRFAN KHAN",
+  "dob": {
+    "$date": "1992-04-25T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "half",
+  "academic_status": "Eligible",
+  "phone_no": "8901234567",
+  "email": "mohammad@example.com",
+  "address": "678 Oak St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 36,
+  "aadhar_card_no": "890123456789"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae820"
+  },
+  "erp_no": 220600295,
+  "Password": 723348,
+  "Name": "NEERAJ DEVENDRA SHARMA",
+  "dob": {
+    "$date": "1996-07-28T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "pending",
+  "academic_status": "Eligible",
+  "phone_no": "9012345678",
+  "email": "neeraj@example.com",
+  "address": "789 Pine St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 37,
+  "aadhar_card_no": "901234567890"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae821"
+  },
+  "erp_no": 220600305,
+  "Password": 708637,
+  "Name": "NIKHILKUMAR ANILKUMAR TIWARI",
+  "dob": {
+    "$date": "1991-02-14T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "half",
+  "academic_status": "Dropout",
+  "phone_no": "1234567890",
+  "email": "nikhil@example.com",
+  "address": "123 Cedar St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 38,
+  "aadhar_card_no": "10101"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae822"
+  },
+  "erp_no": 220600252,
+  "Password": 403499,
+  "Name": "NILESH PARSHURAM GUPTA",
+  "dob": {
+    "$date": "1990-05-07T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "paid",
+  "academic_status": "Dropout",
+  "phone_no": "2345678901",
+  "email": "nilesh@example.com",
+  "address": "345 Birch St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 39,
+  "aadhar_card_no": "11111"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae823"
+  },
+  "erp_no": 220600374,
+  "Password": 97536,
+  "Name": "NISHAD RAJESH SATAV",
+  "dob": {
+    "$date": "1998-11-23T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "pending",
+  "academic_status": "Eligible",
+  "phone_no": "3456789012",
+  "email": "nishad@example.com",
+  "address": "456 Elm St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 40,
+  "aadhar_card_no": "12121"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae824"
+  },
+  "erp_no": 220600259,
+  "Password": 810727,
+  "Name": "NITIN RAMKARAN JAISWAR",
+  "dob": {
+    "$date": "1997-06-30T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "half",
+  "academic_status": "Dropout",
+  "phone_no": "4567890123",
+  "email": "nitin@example.com",
+  "address": "567 Main St",
+  "college_year": "FE",
+  "class": "A",
+  "rollNo": 41,
+  "aadhar_card_no": "13131"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae825"
+  },
+  "erp_no": 220600277,
+  "Password": 401605,
+  "Name": "OJAS ARUN YADAV",
+  "dob": {
+    "$date": "1996-09-14T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "5678901234",
+  "email": "ojas@example.com",
+  "address": "678 Oak St",
+  "college_year": "SE",
+  "class": "B",
+  "rollNo": 42,
+  "aadhar_card_no": "14141"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae826"
+  },
+  "erp_no": 220600076,
+  "Password": 549426,
+  "Name": "POORAV FULBADAN CHAURASIA",
+  "dob": {
+    "$date": "1991-03-27T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "half",
+  "academic_status": "Dropout",
+  "phone_no": "6789012345",
+  "email": "poorav@example.com",
+  "address": "789 Pine St",
+  "college_year": "TE",
+  "class": "C",
+  "rollNo": 43,
+  "aadhar_card_no": "15151"
+},
+{
+  "_id": {
+    "$oid": "65bd379c5f4597d37afae827"
+  },
+  "erp_no": 220600285,
+  "Password": 471563,
+  "Name": "PRANAV HENANT PATIL",
+  "dob": {
+    "$date": "1994-08-10T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "7890123456",
+  "email": "pranav@example.com",
+  "address": "901 Elm St",
+  "college_year": "BE",
+  "class": "D",
+  "rollNo": 44,
+  "aadhar_card_no": "16161"
+},
+{
+
+  "erp_no": 220600317,
+  "Password": 123456,
+  "Name": "VIVEK INDRALAL YADAV",
+  "dob": {
+    "$date": "1997-11-10T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "fees_status": "paid",
+  "academic_status": "Eligible",
+  "phone_no": "9136242560",
+  "email": "vivek.yadav_2022@ltce.in",
+  "address": "789 Pine St",
+  "college_year": "TE",
+  "class": "A",
+  "rollNo": 151,
+  "aadhar_card_no": "345678901237"
+}]
