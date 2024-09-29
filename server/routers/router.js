@@ -4,6 +4,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const db = require('../db'); // Adjust with the correct path to your db.js
 
+require('dotenv').config(); 
 // Serve login.ejs
 router.get('/login', (req, res) => {
     res.render('login');
@@ -19,10 +20,19 @@ router.get('/browse', (req, res) => {
     res.render('browse');
 });
 
+<<<<<<< HEAD
 // Serve profile.ejs with user data from MongoDB
 router.get('/profile', async (req, res) => {
     const userId = req.user.userId; // userId set in authenticateJWT
     const database = db.getDb(); // Get the database instance
+=======
+// Serve profile.ejs with user data from student.json
+router.get('/profile', (req, res) => {
+    console.log("req : " + JSON.stringify(req.body));
+    // Note: Authentication should already be handled in the app.js
+    const userId = req.user.userId; // userId set in authenticateJWT
+    // const filePath = path.join(__dirname, '../data/student.json'); // Adjusted file path
+>>>>>>> 6cf02abec9c8912c187879a44889e0957746e8a2
 
     try {
         const user = await database.collection('BookRe-release').findOne({ erp_no: userId }); // Fetch user from MongoDB
@@ -39,7 +49,12 @@ router.get('/profile', async (req, res) => {
 });
 
 // Login route for checking student ERP and password
+<<<<<<< HEAD
 router.post('/login', async (req, res) => {
+=======
+router.post('/login', (req, res) => {
+    console.log("hello ???")
+>>>>>>> 6cf02abec9c8912c187879a44889e0957746e8a2
     const { erpId, password } = req.body;
     const database = db.getDb(); // Get the database instance
 
@@ -47,9 +62,15 @@ router.post('/login', async (req, res) => {
         const student = await database.collection('BookRe-release').findOne({ erp_no: parseInt(erpId) }); // Fetch student from MongoDB
 
         // Check if student exists and password matches
+<<<<<<< HEAD
         if (student && student.Password === parseInt(password)) { // Adjust password check according to your hashing method
+=======
+        if (student && student.Password === parseInt(password)) {
+            console.log("here the error!")
+>>>>>>> 6cf02abec9c8912c187879a44889e0957746e8a2
             const token = jwt.sign({ userId: student.erp_no }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            res.json({ success: true, token }); // Send the token to the client
+            console.log("Token : " + token)
+            res.json({ success: true, token });
         } else {
             res.json({ success: false, message: 'Invalid ERP ID or password' });
         }

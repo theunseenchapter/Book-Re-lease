@@ -42,10 +42,6 @@ const authenticateJWT = (req, res, next) => {
   }
 };
 
-// Redirect root URL to login
-app.get('/', (req, res) => {
-    res.redirect('/login'); // Redirect to the login route
-});
 
 // Use the router
 app.use("/", router);
