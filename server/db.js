@@ -1,16 +1,27 @@
-const { MongoClient } = require("mongodb");
-const dotenv = require("dotenv");
-dotenv.config();
+const { MongoClient } = require('mongodb');
+require('dotenv').config(); // Load environment variables
 
-const client = new MongoClient(process.env.CONNECTIONSTRING, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+const url = process.env.CONNECTIONSTRING;
+const dbName = 'BookRe-release';
+
+let db;
+
+// Connect to MongoDB
+const client = new MongoClient(url);
 
 async function start() {
-    await client.connect();
-    console.log("Connected to MongoDB");
-    return client.db("BookRe-release"); // Return the database instance
+    try {
+        await client.connect();
+        console.log('Connected successfully to MongoDB');
+        db = client.db(dbName);
+    } catch (err) {
+        console.error('Error connecting to MongoDB:', err);
+        process.exit(1);
+    }
 }
 
-module.exports = start(); // Call start and export the promise
+// Export the database instance and the start function
+module.exports = {
+    start,
+    getDb: () => db
+};

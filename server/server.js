@@ -2,9 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
-const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const db = require('./db'); // Update with the correct path to your db.js file
 require('dotenv').config(); // Load environment variables
 
 const app = express();
@@ -25,42 +25,39 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Load student data
-let studentData;
-try {
-    studentData = JSON.parse(fs.readFileSync('data/student.json', 'utf8')); // Ensure the correct path
-} catch (error) {
-    console.error('Error reading student.json:', error);
-    process.exit(1);
-}
+// Start MongoDB connection
+db.start(); // Call the start function to connect to the database
 
 // Login Route
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { erpId, password } = req.body;
 
-    // Find user in the student.json data
-    const user = studentData.find(student => student.erp_no === parseInt(erpId)); // Match with correct key
+    try {
+        // Get the database instance
+        const database = db.getDb();
+        
+        // Find user in MongoDB
+        const user = await database.collection('BookRe-release').findOne({ erp_no: parseInt(erpId) });
 
-    // Check if user exists
-    if (!user) {
-        return res.status(401).json({ success: false, message: 'Invalid ERP ID or password' });
-    }
-
-    // Compare the entered password with the stored hashed password
-    bcrypt.compare(password, user.Password.toString(), (err, result) => { // Ensure Password is a string
-        if (err) {
-            console.error('Error during password comparison:', err);
-            return res.status(500).json({ success: false, message: 'Internal server error' });
+        // Check if user exists
+        if (!user) {
+            return res.status(401).json({ success: false, message: 'Invalid ERP ID or password' });
         }
 
-        if (result) {
+        // Compare the entered password with the stored hashed password
+        const isMatch = await bcrypt.compare(password, user.Password.toString()); // Ensure Password is a string
+
+        if (isMatch) {
             // Generate JWT token upon successful login
             const token = jwt.sign({ userId: user.erp_no }, process.env.JWT_SECRET, { expiresIn: '1h' });
             return res.status(200).json({ success: true, token }); // Send the token to the client
         } else {
             return res.status(401).json({ success: false, message: 'Invalid ERP ID or password' });
         }
-    });
+    } catch (err) {
+        console.error('Error during login:', err);
+        return res.status(500).json({ success: false, message: 'Internal server error' });
+    }
 });
 
 // Middleware to authenticate using JWT
@@ -91,13 +88,22 @@ app.get('/index', authenticateJWT, (req, res) => {
 });
 
 // Profile Route
-app.get('/profile', authenticateJWT, (req, res) => {
+app.get('/profile', authenticateJWT, async (req, res) => {
     const userId = req.user.userId; // userId from token
-    const user = studentData.find(student => student.erp_no === userId); // Use correct key
-    if (user) {
-        res.render('profile', { user }); // Render profile.ejs and pass user data
-    } else {
-        return res.status(404).json({ success: false, message: 'User not found' });
+
+    try {
+        // Get the database instance
+        const database = db.getDb();
+        
+        const user = await database.collection('BookRe-release').findOne({ erp_no: userId }); // Use correct key
+        if (user) {
+            res.render('profile', { user }); // Render profile.ejs and pass user data
+        } else {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (err) {
+        console.error('Error fetching user data:', err);
+        return res.status(500).json({ success: false, message: 'Internal server error' });
     }
 });
 
