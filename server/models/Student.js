@@ -1,38 +1,36 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Define the schema for the student data
 const studentSchema = new Schema({
-  erp_no: {
+  erpNo: {
     type: Number,
     required: true,
     unique: true
   },
-  Password: {
+  password: {
     type: Number,
     required: true
   },
-  Name: {
+  name: { 
     type: String,
     required: true
   },
-
   gender: {
     type: String,
     enum: ['Male', 'Female', 'Other'],
     required: true
   },
-  fees_status: {
+  feesStatus: { 
     type: String,
     enum: ['paid', 'half', 'pending'],
     required: true
   },
-  academic_status: {
+  academicStatus: { 
     type: String,
     enum: ['Eligible', 'Not Eligible'],
     required: true
   },
-  phone_no: {
+  phoneNo: { 
     type: String,
     required: true
   },
@@ -45,7 +43,7 @@ const studentSchema = new Schema({
     type: String,
     required: true
   },
-  college_year: {
+  collegeYear: { 
     type: String,
     enum: ['FE', 'SE', 'TE', 'BE'],
     required: true
@@ -58,7 +56,7 @@ const studentSchema = new Schema({
     type: Number,
     required: true
   },
-  aadhar_card_no: {
+  aadharCardNo: { 
     type: String,
     required: true
   }

@@ -1,60 +1,47 @@
 const express = require("express");
-const path = require("path");
-const router = require("./routers/router");
-const fileUpload = require("express-fileupload");
+const mongoose = require("mongoose");
+const studentRoutes = require("./routers/studentRoutes");
+const adminRoutes = require("./routers/adminRoutes");
+const bookRoutes = require("./routers/booksRoutes");
+const bodyParser = require("body-parser");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
-require('dotenv').config(); // Load environment variables
+const http = require("http");
 
 const app = express();
-
-app.use(express.urlencoded({ extended: false }));
+const server = http.createServer(app);
 app.use(express.json());
-app.use(
-  fileUpload({
-    createParentPath: true,
-  })
-);
+app.use(cors());
+app.use(bodyParser.json());
 
-// Serve static files
-app.use(express.static("public"));
+const dbName = "bookstore";
 
-// Set views and template engine
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
-// Middleware to authenticate using JWT
-const authenticateJWT = (req, res, next) => {
-  const token = req.headers['authorization'];
-
-  if (token) {
-    jwt.verify(token.split(' ')[1], process.env.JWT_SECRET, (err, user) => {
-      if (err) {
-        console.error('JWT verification error:', err);
-        return res.sendStatus(403); // Forbidden
-      }
-      req.user = user; // Attach user to request
-      next();
-    });
-  } else {
-    console.error('No token provided');
-    res.sendStatus(401); // Unauthorized
-  }
-};
+mongoose
+  .connect(
+    `mongodb+srv://oscar:I6TUsF3dLRLBkZ8P@oscar.rvxt1.mongodb.net/bookstore?retryWrites=true&w=majority`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => console.log(`MongoDB connected to ${dbName} database`))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 
-// Use the router
-app.use("/", router);
-
-// Protect the profile route with JWT middleware
-app.get('/profile', authenticateJWT, (req, res) => {
-  res.render('profile', { user: req.user });
+app.get("/", (req, res) => {
+  res.send(`OSCAR is very Cute`);
 });
 
-// Start the server
+app.use("/api/students", studentRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/books", bookRoutes);
+
+app.use((req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
+
 const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
 
-module.exports = app;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Click here to access the app: http://localhost:${PORT}/`);
+});
