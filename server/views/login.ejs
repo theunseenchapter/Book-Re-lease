@@ -16,7 +16,7 @@
         <section id="login">
             <h2>Login</h2>
             <form id="loginForm">
-                <input type="text" id="loginERP" placeholder="ERP ID" required>
+                <input type="number" id="loginERP" placeholder="ERP ID" required>
                 
                 <div class="password-container">
                     <input type="password" id="loginPassword" placeholder="Password" required>
@@ -38,22 +38,25 @@
             passwordInput.setAttribute('type', type);
             this.classList.toggle('fa-eye-slash');
         });
+        
 
         // Form submission handler
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const erpId = document.getElementById('loginERP').value.trim();
+            const Number_erp=parseInt(erpId);
             const password = document.getElementById('loginPassword').value.trim();
 
-            fetch('/login', {
+            fetch('/api/students/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ erpId, password })
+                body: JSON.stringify({ Number_erp, password })
             })
             .then(response => response.json())
             .then(data => {
+                console.log("dataprint"+ data.user+data.message);
                 if (data.success) {
                     sessionStorage.setItem('userId', data.userId);
                     window.location.href = '/index';
