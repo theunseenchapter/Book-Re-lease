@@ -107,8 +107,13 @@ app.get('/profile', authenticateJWT, async (req, res) => {
     }
 });
 
+// Route to serve the homepage
+app.get('/', (req, res) => {
+    res.redirect('/login'); // Redirect to login page on homepage access
+});
+
 // Start the server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
