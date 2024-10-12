@@ -2,14 +2,20 @@ const express = require("express");
 const mongoose = require("mongoose");
 const studentRoutes = require("./routers/studentRoutes");
 const adminRoutes = require("./routers/adminRoutes");
+const viewRoutes = require("./routers/router");
 const bookRoutes = require("./routers/booksRoutes");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require("http");
+const ejs = require("ejs");
 
 const app = express();
 const server = http.createServer(app);
+// Set the view engine to ejs
+app.set("view engine", "ejs");
 
+// Set the directory for static files
+app.use(express.static("public"));
 // Middleware setup
 app.use(express.json());
 app.use(cors());
@@ -28,14 +34,16 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Serve the login page (make sure you have a login route)
-app.get("/", (req, res) => {
-  res.redirect("/login"); // Redirect to login page
-});
 
 // Define API routes
+
 app.use("/api/students", studentRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/books", bookRoutes);
+app.use("/", viewRoutes);
+app.get("/", (req, res) => {
+  res.redirect("/login"); // Redirect to login page
+});
 
 // 404 error handling
 app.use((req, res) => {
