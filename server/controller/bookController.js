@@ -3,13 +3,14 @@ const Transaction = require('../models/Transaction');
 
 exports.createBook = async (req, res) => {
   try {
-    const { title, author, description, price, condition } = req.body;
+    const { title, author, description, price, condition, status } = req.body;
     const book = new Book({
       title,
       author,
       description,
       price,
       condition,
+      status,
       listedBy: req.user._id
     });
     await book.save();
@@ -20,6 +21,7 @@ exports.createBook = async (req, res) => {
 };
 
 exports.getAllBooks = async (req, res) => {
+  console.log("hitting me?")
   try {
     const books = await Book.find({ status: 'Available' }).populate('listedBy', 'name email');
     res.json(books);

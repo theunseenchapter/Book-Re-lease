@@ -11,22 +11,44 @@ exports.login = async (req, res) => {
     const student = await ClgStudent.findOne({erp_no: Number_erp });
     console.log("erp"+ Number_erp);
     console.log("password"+ password);
+    console.log("the student : " + student);
     if (!student) {
       return res.status(400).json({ error: "Invalid credentials" });
-      console.log("random1");
     }
 
     const isMatch = (password === student.password);
     if (!isMatch) {
       return res.status(400).json({ error: 'Invalid credentials' });
-      console.log("random2");
     }
     
     const token = jwt.sign({ id: student._id, role: "student" }, JWT_SECRET, {
       expiresIn: "30d",
     });
-    // const newuser=new Student(student)
-    // await newuser.save();
+    const newuser=new Student(
+      {
+        name:student.name,
+        email:student.email,
+        password:student.password,
+        role:"student",
+        erp_no:student.erp_no,
+        academic_status: student.academic_status,
+        phone_no: student.phone_no,
+        address: student.address,
+        gender:  student.gender,
+        college_year: student.college_year,
+        class: student.class,
+        rollNo: student.rollNo,
+        aadhar_card_no: student.aadhar_card_no,
+        fees_status: student.fees_status,
+        
+      }
+    )
+    const existingUser = await Student.findOne({erp_no: newuser.erp_no });
+    if(existingUser){
+      return res.status(400).json({ error: "User already exists" });
+    }
+
+    await newuser.save();
     res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
   } catch (err) {
     res.status(500).json({ error: "Server error " + err });
