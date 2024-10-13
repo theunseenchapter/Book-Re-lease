@@ -25,8 +25,8 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: student._id, role: "student" }, JWT_SECRET, {
       expiresIn: "30d",
     });
-    const newuser=new Student(student)
-    await newuser.save();
+    // const newuser=new Student(student)
+    // await newuser.save();
     res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
   } catch (err) {
     res.status(500).json({ error: "Server error " + err });
