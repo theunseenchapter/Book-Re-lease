@@ -6,27 +6,33 @@ const ClgStudent = require("../models/ClgStudent");
 
 exports.login = async (req, res) => {
   try {
-    const { erp_no, password } = req.body;
-
-    const student = await ClgStudent.findOne({ erp_no });
+    console.log("hello world");
+    const { Number_erp, password } = req.body;
+    const student = await ClgStudent.findOne({erp_no: Number_erp });
+    console.log("erp"+ Number_erp);
+    console.log("password"+ password);
     if (!student) {
       return res.status(400).json({ error: "Invalid credentials" });
+      console.log("random1");
     }
 
     const isMatch = (password === student.password);
     if (!isMatch) {
       return res.status(400).json({ error: 'Invalid credentials' });
+      console.log("random2");
     }
     
     const token = jwt.sign({ id: student._id, role: "student" }, JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "30d",
     });
-    res.json({ user: student, token: token });
+    const newuser=new Student(student)
+    await newuser.save();
+    res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
   } catch (err) {
     res.status(500).json({ error: "Server error " + err });
   }
 };
-
+ 
 exports.getProfile = async (req, res) => {
   try {
     const student = await Student.findById(req.user._id).select("-password");

@@ -15,6 +15,10 @@ const bookSchema = new Schema({
     type: Number,
     required: true
   },
+  book_image:{
+    type:String,
+    default:"https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg"
+  },
   condition: { 
     type: String,
     enum: ['New', 'Good', 'Fair', 'Poor'],

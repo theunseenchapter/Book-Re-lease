@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const studentSchema = new Schema({
-  erpNo: {
+  erp_no: {
     type: Number,
     required: true,
     unique: true
@@ -20,17 +20,17 @@ const studentSchema = new Schema({
     enum: ['Male', 'Female', 'Other'],
     required: true
   },
-  feesStatus: { 
+  fees_status: { 
     type: String,
     enum: ['paid', 'half', 'pending'],
     required: true
   },
-  academicStatus: { 
+  academic_status: { 
     type: String,
     enum: ['Eligible', 'Not Eligible'],
     required: true
   },
-  phoneNo: { 
+  phone_no: { 
     type: String,
     required: true
   },
@@ -43,7 +43,7 @@ const studentSchema = new Schema({
     type: String,
     required: true
   },
-  collegeYear: { 
+  college_year: { 
     type: String,
     enum: ['FE', 'SE', 'TE', 'BE'],
     required: true
@@ -56,9 +56,9 @@ const studentSchema = new Schema({
     type: Number,
     required: true
   },
-  aadharCardNo: { 
+  aadhar_card_no: { 
     type: String,
-    required: true
+    required: false
   }
 });
 
