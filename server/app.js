@@ -44,7 +44,7 @@ app.use("/", viewRoutes);
 app.get("/", (req, res) => {
   res.redirect("/login"); // Redirect to login page
 });
-
+app.get("/profile",)
 // 404 error handling
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });

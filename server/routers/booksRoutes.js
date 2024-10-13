@@ -3,10 +3,10 @@ const router = express.Router();
 const bookController = require('../controller/bookController');
 const auth = require('../middleware/authMiddleware');
 
-router.get('/', bookController.getAllBooks);
+router.get('/get-allbooks', bookController.getAllBooks);
 router.get('/:bookId', bookController.getBookById);
 
-router.post('/', auth, (req, res, next) => {
+router.post('/create-book', auth, (req, res, next) => {
   if (req.role !== 'student') {
     return res.status(403).json({ error: 'Access denied' });
   }
