@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
     )
     const existingUser = await Student.findOne({erp_no: newuser.erp_no });
     if(existingUser){
-      return res.status(400).json({ error: "User already exists" });
+    res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
     }
 
     await newuser.save();
