@@ -56,9 +56,9 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log("dataprint"+ data.user+data.message);
                 if (data.success) {
-                    sessionStorage.setItem('userId', data.userId);
+                    sessionStorage.setItem('userId',data.user._id);
+                    sessionStorage.setItem('token',data.token);
                     window.location.href = '/index';
                 } else {
                     alert(data.message);

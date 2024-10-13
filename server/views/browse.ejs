@@ -19,37 +19,44 @@
             </ul>
         </nav>
     </header>
-    <div class="container">
+
+    <main class="container">
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search for books..." />
             <button id="searchButton">Search</button>
         </div>
+
         <section id="books-dashboard">
             <h2>Books Available</h2>
             <div id="booksList"></div>
         </section>
-    </div>
+    </main>
 
     <script>
-        const apiUrl = 'http://localhost:3001';
 
-        // Function to load books
+        // Load books from the API
         function loadBooks(query = '') {
-            fetch(`${apiUrl}/api/books/get-allbooks`, {
-                credentials: 'include'
+            fetch(`/api/books/get-allbooks`, {
+                // headers: {
+                //     // 'Authorization': `Bearer ${localStorage.getItem('token')}`, // Fetch token from local storage
+                //     'Content-Type': 'application/json' // Specify content type
+                // },
+                credentials: 'include',
             })
-            .then(response => response.json())
-            .then(data => {
-                displayBooks(data);
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
             })
+            .then(data => displayBooks(data))
             .catch(error => {
                 console.error('Error fetching books:', error);
-                console.log("error is"+error);
-            document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again later.</p>';
+                document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again later.</p>';
             });
         }
 
-        // Function to display books
+        // Display books in the UI
         function displayBooks(books) {
             const booksDiv = document.getElementById('booksList');
             booksDiv.innerHTML = ''; // Clear previous books
@@ -73,24 +80,24 @@
         }
 
         // Load books when the page loads
-        window.onload = () => loadBooks();
+        window.onload = loadBooks;
 
         // Logout functionality
         document.getElementById('logout').addEventListener('click', function(e) {
             e.preventDefault();
             fetch(`${apiUrl}/logout`, {
-                credentials: 'include'
+                credentials: 'include',
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = '../views/login.html'; // Redirect to login page
+                    window.location.href = 'login.html'; // Redirect to login page
                 }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Error during logout:', error));
         });
 
-        // Event listener for search
+        // Event listener for search button
         document.getElementById('searchButton').addEventListener('click', function() {
             const query = document.getElementById('searchInput').value.trim();
             loadBooks(query); // Load books with the search query

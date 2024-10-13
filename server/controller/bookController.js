@@ -24,7 +24,7 @@ exports.getAllBooks = async (req, res) => {
   console.log("hitting me?")
   try {
     const books = await Book.find({ status: 'Available' }).populate('listedBy', 'name email');
-    res.json(books);
+    res.status(200).json(books);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }

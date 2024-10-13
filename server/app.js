@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require("http");
 const ejs = require("ejs");
+const path= require("path");
 
 const app = express();
 const server = http.createServer(app);
@@ -16,6 +17,7 @@ app.set("view engine", "ejs");
 
 // Set the directory for static files
 app.use(express.static("public"));
+app.set('views', path.join(__dirname, 'views'));
 // Middleware setup
 app.use(express.json());
 app.use(cors());
