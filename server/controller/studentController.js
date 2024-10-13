@@ -11,7 +11,6 @@ exports.login = async (req, res) => {
     const student = await ClgStudent.findOne({erp_no: Number_erp });
     console.log("erp"+ Number_erp);
     console.log("password"+ password);
-    console.log("the student : " + student);
     if (!student) {
       return res.status(400).json({ error: "Invalid credentials" });
     }
