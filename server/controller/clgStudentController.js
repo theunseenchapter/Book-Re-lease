@@ -1,3 +1,4 @@
+const ClgStudent = require('../models/ClgStudent');
 const Student = require('../models/Student');
 
 
@@ -16,7 +17,7 @@ exports.bulkUpload = async (req, res) => {
         return student;
       });
   
-      const savedStudents = await Student.insertMany(processedStudents);
+      const savedStudents = await ClgStudent.insertMany(processedStudents);
       res.status(201).json({ message: 'Students data uploaded successfully', savedStudents });
     } catch (err) {
       console.error('Error uploading students data:', err);
