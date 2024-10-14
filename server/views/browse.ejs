@@ -12,10 +12,10 @@
         <h1>Book Re-Lease</h1>
         <nav>
             <ul class="nav-menu">
-                <li><a href="browse.html">Browse Books</a></li>
-                <li><a href="index.html">Post Your Book</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="login.html" id="logout">Logout</a></li>
+                <li><a href="browse">Browse Books</a></li>
+                <li><a href="index">Post Your Book</a></li>
+                <li><a id="profile">Profile</a></li>
+                <li><a href="login" id="logout">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -85,13 +85,15 @@
         // Logout functionality
         document.getElementById('logout').addEventListener('click', function(e) {
             e.preventDefault();
-            fetch(`/api/students/logout`, {
+            sessionStorage.clear();
+            fetch(`/api/logout`, {
+                method:"POST",
                 credentials: 'include',
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = 'login.html'; // Redirect to login page
+                    window.location.href = '/login'; // Redirect to login page
                 }
             })
             .catch(error => console.error('Error during logout:', error));
@@ -102,6 +104,25 @@
             const query = document.getElementById('searchInput').value.trim();
             loadBooks(query); // Load books with the search query
         });
+
+        document.getElementById("profile").addEventListener("click", function (e) {
+            e.preventDefault();
+            const user = sessionStorage.getItem("user");
+            fetch("/profile", {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json', // Set the content type to JSON
+                },
+                credentials: 'include', // Include credentials for cookies or session handling
+                user: JSON.stringify(user)
+            }).then(response => {
+            return response.json(); // Parse the response as JSON
+        }).then(data => {
+                console.log('Success:', data);
+                // Handle the success response, like redirecting or updating the UI
+            })
+            .catch(error => console.error('Error:', error)); // Handle errors
+        })
     </script>
 </body>
 </html>

@@ -31,10 +31,11 @@ router.get('/login', (req, res) => {
 });
 
 // Route to render profile.ejs (with authentication)
-router.get('/profile', authenticateJWT, (req, res) => {
+ router.get('/profile', (req, res) => {
     // Pass the decoded user data (from the JWT) to the profile view
     res.render('profile', { user: req.user });
 });
+
 
 // Route to render index.ejs
 router.get('/index', (req, res) => {
@@ -46,11 +47,5 @@ router.get('/browse', (req, res) => {
     res.render('browse');
 });
 
-router.post('/logout', (req, res) => {
-    // Optionally, if you want to blacklist the token or remove the session, handle it here
-  
-    // Just send a response indicating the logout was successful
-    return res.status(200).json({ message: 'Logout successful' });
-  });
 
 module.exports = router;

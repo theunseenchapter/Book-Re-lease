@@ -57,7 +57,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    sessionStorage.setItem('userId',data.user._id);
+                    sessionStorage.setItem('user',JSON.stringify(data.user));
                     sessionStorage.setItem('token',data.token);
                     window.location.href = '/index';
                 } else {

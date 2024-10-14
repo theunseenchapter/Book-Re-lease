@@ -44,7 +44,9 @@
         // Logout functionality
         document.getElementById('logout').addEventListener('click', function(e) {
             e.preventDefault();
-            fetch('/logout', {
+            sessionStorage.clear();
+            fetch('/api/logout', {
+                method:"POST",
                 credentials: 'include'
             })
             .then(response => response.json())
@@ -53,7 +55,7 @@
                     window.location.href = '/login';
                 }
             })
-            .catch(error => console.error('Error:', error));
+            
         });
 
         // Event listener for posting a new book
@@ -82,10 +84,10 @@
                 alert(data.message || 'Book posted successfully');
                 document.getElementById('postBookForm').reset();
             })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            });
+            // .catch(error => {
+            //     console.error('Error:', error);
+            //     alert('An error occurred. Please try again.');
+            // });
         });
     </script>
 </body>

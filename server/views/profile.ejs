@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="index1.css">
 </head>
+
 <body>
     <header>
         <h1>Profile</h1>
@@ -14,65 +15,66 @@
             <ul class="nav-menu">
                 <li><a href="browse">Browse Books</a></li>
                 <li><a href="index">Post Your Book</a></li>
-                <li><a href="profile">Profile</a></li>
+                <li><a id="profile">Profile</a></li>
                 <li><a href="login" id="logout">Logout</a></li>
             </ul>
         </nav>
     </header>
-    
+
     <div class="container">
-        <!-- <%= user%> -->
-        <!-- <section class="profile-info">
+        <section class="profile-info">
             <h2>User Information</h2>
             <div class="profile-item">
-                <h3>Name: <span><%= user.name %></span></h3>
+                <h3>Name: <span id="name"></span></h3>
             </div>
             <div class="profile-item">
-                <h3>Class: <span><%= user.class %></span></h3> 
+                <h3>Class: <span id="class"></span></h3>
             </div>
             <div class="profile-item">
-                <h3>College Year: <span><%= user.college_year %></span></h3>
+                <h3>College Year: <span id="collegeYear"></span></h3>
             </div>
             <div class="profile-item">
-                <h3>Roll No: <span><%= user.rollNo %></span></h3> 
+                <h3>Roll No: <span id="rollNo"></span></h3>
             </div>
             <div class="profile-item">
-                <h3>Email: <span><%= user.email %></span></h3>
+                <h3>Email: <span id="email"></span></h3>
             </div>
             <div class="profile-item">
-                <h3>Phone No: <span><%= user.phone_no %></span></h3>
+                <h3>Phone No: <span id="phoneNo"></span></h3>
             </div>
-            <div class="profile-item">
-                <h3>Gender: <span><%= user.gender %></span></h3>
-            </div>
-            <div class="profile-item">
-                <h3>Fees Status: <span><%= user.fees_status %></span></h3> 
-            </div>
-            <div class="profile-item">
-                <h3>Academic Status: <span><%= user.academic_status %></span></h3>
-            </div>
-            <div class="profile-item">
-                <h3>Address: <span><%= user.address %></span></h3> 
-            </div>
-            <% if (user.aadhar_card_no) { %> 
-            <div class="profile-item">
-                <h3>Aadhar Card No: <span><%= user.aadhar_card_no %></span></h3> 
-            </div>
-            <% } %>
-        </section> -->
+        </section>
     </div>
 
     <script>
+        // Retrieve the user data from sessionStorage
+        const user = JSON.parse(sessionStorage.getItem('user')); 
+        console.log(user); // Parse the user data from sessionStorage
+        
+        if (user) {
+            // Populate the profile data
+            document.getElementById('name').textContent = user.name;
+            document.getElementById('class').textContent = user.class;
+            document.getElementById('collegeYear').textContent = user.college_year;
+            document.getElementById('rollNo').textContent = user.rollNo;
+            document.getElementById('email').textContent = user.email;
+            document.getElementById('phoneNo').textContent = user.phone_no;
+        } else {
+            alert("User data not found. Please log in again.");
+            window.location.href = "/login";
+        }
+
         // Logout functionality
-        document.getElementById('logout').addEventListener('click', function(e) {
+        document.getElementById('logout').addEventListener('click', function (e) {
             e.preventDefault();
-            fetch('/logout', {
+            sessionStorage.clear();  // Clear sessionStorage
+            fetch('/api/logout', {
+                method: "POST",
                 credentials: 'include'
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = 'login'; // Redirect to login page
+                    window.location.href = '/login';  // Redirect to login page
                 }
             })
             .catch(error => console.error('Error:', error));
