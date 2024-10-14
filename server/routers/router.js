@@ -46,4 +46,11 @@ router.get('/browse', (req, res) => {
     res.render('browse');
 });
 
+router.post('/logout', (req, res) => {
+    // Optionally, if you want to blacklist the token or remove the session, handle it here
+  
+    // Just send a response indicating the logout was successful
+    return res.status(200).json({ message: 'Logout successful' });
+  });
+
 module.exports = router;

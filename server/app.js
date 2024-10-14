@@ -9,6 +9,7 @@ const cors = require("cors");
 const http = require("http");
 const ejs = require("ejs");
 const path= require("path");
+const router = require("./routers/studentRoutes");
 
 const app = express();
 const server = http.createServer(app);
@@ -40,6 +41,7 @@ mongoose
 // Define API routes
 
 app.use("/api/students", studentRoutes);
+app.use("/api/students/logout",router);
 app.use("/api/admin", adminRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/", viewRoutes);

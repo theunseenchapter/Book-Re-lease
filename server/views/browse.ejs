@@ -71,7 +71,7 @@
                         <p>Author: ${book.author}</p>
                         <p>Type: ${book.type}</p>
                         <p>Price: $${book.price}</p>
-                        ${book.book_image ? `<img src="${apiUrl}/uploads/${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
+                        ${book.book_image ? `<img src="$/api/books/get-allbooks/uploads/${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
                         <button class="book-btn" data-book-id="${book.id}">Book Your Book</button>
                     `;
                     booksDiv.appendChild(bookItem);
@@ -85,7 +85,7 @@
         // Logout functionality
         document.getElementById('logout').addEventListener('click', function(e) {
             e.preventDefault();
-            fetch(`${apiUrl}/logout`, {
+            fetch(`/api/students/logout`, {
                 credentials: 'include',
             })
             .then(response => response.json())
