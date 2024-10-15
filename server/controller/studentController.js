@@ -24,32 +24,35 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: student._id, role: "student" }, JWT_SECRET, {
       expiresIn: "30d",
     });
-    const newuser=new Student(
-      {
-        name:student.name,
-        email:student.email,
-        password:student.password,
-        role:"student",
-        erp_no:student.erp_no,
-        academic_status: student.academic_status,
-        phone_no: student.phone_no,
-        address: student.address,
-        gender:  student.gender,
-        college_year: student.college_year,
-        class: student.class,
-        rollNo: student.rollNo,
-        aadhar_card_no: student.aadhar_card_no,
-        fees_status: student.fees_status,
-        
-      }
-    )
-    const existingUser = await Student.findOne({erp_no: newuser.erp_no });
+   
+    const existingUser = await Student.findOne({erp_no: Number_erp });
     if(existingUser){
     res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
     }
 
-    await newuser.save();
-    res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
+    else{
+      const newuser=new Student(
+        {
+          name:student.name,
+          email:student.email,
+          password:student.password,
+          role:"student",
+          erp_no:student.erp_no,
+          academic_status: student.academic_status,
+          phone_no: student.phone_no,
+          address: student.address,
+          gender:  student.gender,
+          college_year: student.college_year,
+          class: student.class,
+          rollNo: student.rollNo,
+          aadhar_card_no: student.aadhar_card_no,
+          fees_status: student.fees_status,
+          
+        }
+      )
+      await newuser.save();
+      res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
+    }
   } catch (err) {
     res.status(500).json({ error: "Server error " + err });
   }

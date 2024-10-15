@@ -27,7 +27,7 @@ const studentSchema = new Schema({
   },
   academic_status: { 
     type: String,
-    enum: ['Eligible', 'Not Eligible'],
+    enum: ['Eligible', 'Not Eligible', 'Dropout'],
     required: true
   },
   phone_no: { 
