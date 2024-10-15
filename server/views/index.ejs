@@ -3,190 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Book Re-Lease | Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  
+
     <style>
-        /* Global Styles */
-:root {
-    --primary-color: rgba(0, 51, 102, 0.95); /* Bright Blue */
-    --secondary-color: rgba(80, 227, 194, 0.9); /* Light Teal */
-    --background-color: rgba(244, 244, 244, 0.95); /* Light Grey */
-    --text-color: #333; /* Dark Charcoal */
-    --border-color: #ddd; /* Light Border */
-    --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly Darker Shadow */
-}
+        :root {
+            --primary-color: rgba(0, 51, 102, 0.95);
+            --secondary-color: rgba(80, 227, 194, 0.9);
+            --background-color: rgba(244, 244, 244, 0.95);
+            --text-color: #333;
+            --border-color: #ddd;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+        }
 
-/* Universal Reset */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Body Styles */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-image: url('giammarco-boscaro-zeH-ljawHtg-unsplash.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    color: var(--text-color);
-    line-height: 1.6;
-    position: relative;
-    overflow-x: hidden;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-/* Header Styles */
-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1.5rem 0;
-    text-align: center;
-    
-    z-index: 10;
-    box-shadow: 0 4px 8px var(--shadow-color);
-}
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
 
-nav {
-    margin-top: 1rem;
-}
+        nav {
+            margin-top: 1rem;
+        }
 
-.nav-menu {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-}
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
 
-.nav-menu li {
-    margin: 0 1rem;
-}
+        .nav-menu li {
+            margin: 0 1rem;
+        }
 
-.nav-menu a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-.nav-menu a:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-}
+        .nav-menu a:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
 
-/* Container Styles */
-.container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Center the content vertically */
-    height: calc(100vh - 60px); /* Adjust height for the header */
-}
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: calc(100vh - 60px);
+        }
 
-/* Split Container Styles */
-.split-container {
-    display: flex;
-    width: 100%;
-    gap: 2rem;
-}
+        .split-container {
+            display: flex;
+            width: 100%;
+            gap: 2rem;
+        }
 
-.half-page {
-    width: 90%; /* Use more space */
-    max-width: 600px; /* Limit max width */
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    margin: 0 auto; /* Center the section */
-    top:-10px;
-    position: relative;
-    margin: 0 auto;
-}
+        .half-page {
+            width: 90%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            margin: 0 auto;
+            top: -10px;
+            position: relative;
+        }
 
-/* Heading Styles */
-h2 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    font-weight: 600;
-}
+        h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
 
-/* Input, Select, and Button Styles */
-input, select, button {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
+        input, select, button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
 
-input:focus, select:focus, button:focus {
-    border-color: var(--primary-color);
-    outline: none;
-}
+        input:focus, select:focus, button:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
 
-button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 0.75rem;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-button:hover {
-    background-color: rgba(0, 51, 102, 1);
-    transform: scale(1.02);
-}
+        button:hover {
+            background-color: rgba(0, 51, 102, 1);
+            transform: scale(1.02);
+        }
 
-button.short {
-    width: auto; 
-    padding: 0.5rem 1rem;
-}
+        button.short {
+            width: auto; 
+            padding: 0.5rem 1rem;
+        }
 
-/* Book Item Styles */
-.book-item {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 4px 6px var(--shadow-color);
-}
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
+            }
 
-.book-item h3 {
-    margin-bottom: 0.5rem;
-    font-size: 1.25rem;
-    color: var(--primary-color);
-}
-
-.book-item p {
-    margin: 0.25rem 0;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .split-container {
-        flex-direction: column;
-    }
-
-    .half-page {
-        width: 100%;
-    }
-}
-
+            .half-page {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -201,6 +164,7 @@ button.short {
             </ul>
         </nav>
     </header>
+
     <div class="container">
         <div class="split-container">
             <section id="post" class="half-page center">
@@ -208,11 +172,12 @@ button.short {
                 <form id="postBookForm">
                     <input type="text" id="bookTitle" placeholder="Book Title" required>
                     <input type="text" id="bookAuthor" placeholder="Author" required>
-                    <select id="bookType">
+                    <select id="bookType" required>
+                        <option value="" disabled selected>Select Type</option>
                         <option value="sell">Sell</option>
                         <option value="rent">Rent</option>
                     </select>
-                    <input type="number" id="bookPrice" placeholder="Price" required>
+                    <input type="number" id="bookPrice" placeholder="Price" required min="0">
                     <input type="file" id="bookPhoto" accept="image/*" required>
                     <button class="short" type="submit">Post Book</button>
                 </form>
@@ -221,6 +186,7 @@ button.short {
     </div>
 
     <script>
+        // API URL
         const apiUrl = '/';
 
         // Logout functionality
@@ -228,7 +194,7 @@ button.short {
             e.preventDefault();
             sessionStorage.clear();
             fetch('/api/logout', {
-                method:"POST",
+                method: "POST",
                 credentials: 'include'
             })
             .then(response => response.json())
@@ -236,40 +202,46 @@ button.short {
                 if (data.success) {
                     window.location.href = '/login';
                 }
-            })
-            
+            });
         });
 
         // Event listener for posting a new book
         document.getElementById('postBookForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const newBook = {
-                title: document.getElementById('bookTitle').value.trim(),
-                author: document.getElementById('bookAuthor').value.trim(),
-                type: document.getElementById('bookType').value,
-                price: parseFloat(document.getElementById('bookPrice').value)
-            };
 
+            // Get form data
             const formData = new FormData();
-            formData.append('title', newBook.title);
-            formData.append('author', newBook.author);
-            formData.append('type', newBook.type);
-            formData.append('price', newBook.price);
+            formData.append('title', document.getElementById('bookTitle').value.trim());
+            formData.append('author', document.getElementById('bookAuthor').value.trim());
+            formData.append('type', document.getElementById('bookType').value);
+            formData.append('price', parseFloat(document.getElementById('bookPrice').value));
             formData.append('photo', document.getElementById('bookPhoto').files[0]);
 
-            fetch(`${apiUrl}/post`, {
+            // Validate file input
+            const fileInput = document.getElementById('bookPhoto');
+            if (!fileInput.files[0]) {
+                alert('Please upload an image.');
+                return;
+            }
+
+            // Send POST request
+            fetch('/api/books/create-Book', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.message || 'Book posted successfully');
-                document.getElementById('postBookForm').reset();
+                if (data.success) {
+                    alert('Book posted successfully!');
+                    document.getElementById('postBookForm').reset();
+                } else {
+                    alert(data.message || 'Failed to post the book.');
+                }
             })
-            // .catch(error => {
-            //     console.error('Error:', error);
-            //     alert('An error occurred. Please try again.');
-            // });
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
         });
     </script>
 </body>

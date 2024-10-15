@@ -42,6 +42,7 @@ app.use("/api/students", studentRoutes);
 app.use("/api/logout", logoutRoutes); // Use logoutRoutes for logout functionality
 app.use("/api/admin", adminRoutes);
 app.use("/api/books", bookRoutes);
+
 app.use("/", viewRoutes);
 
 app.get("/", (req, res) => {

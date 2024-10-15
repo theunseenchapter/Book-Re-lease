@@ -5,12 +5,15 @@ const JWT_SECRET = "IAMCUTE";
 const ClgStudent = require("../models/ClgStudent");
 
 exports.login = async (req, res) => {
+  
   try {
     console.log("hello world");
     const { Number_erp, password } = req.body;
     const student = await ClgStudent.findOne({erp_no: Number_erp });
     console.log("erp"+ Number_erp);
     console.log("password"+ password);
+    console.log("this is the student: " + student)
+    console.log("std ErP: " + student.erp_no)
     if (!student) {
       return res.status(400).json({ error: "Invalid credentials" });
     }
@@ -23,32 +26,36 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: student._id, role: "student" }, JWT_SECRET, {
       expiresIn: "30d",
     });
-    const newuser=new Student(
-      {
-        name:student.name,
-        email:student.email,
-        password:student.password,
-        role:"student",
-        erp_no:student.erp_no,
-        academic_status: student.academic_status,
-        phone_no: student.phone_no,
-        address: student.address,
-        gender:  student.gender,
-        college_year: student.college_year,
-        class: student.class,
-        rollNo: student.rollNo,
-        aadhar_card_no: student.aadhar_card_no,
-        fees_status: student.fees_status,
-        
-      }
-    )
-    const existingUser = await Student.findOne({erp_no: newuser.erp_no });
+    const { _id, ...studentDataWithoutId } = student._doc;
+  
+    const existingUser = await Student.findOne({erp_no: Number_erp });
     if(existingUser){
+      console.log("this should work");
     res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
     }
     else{
+      // const newuser=new Student(
+      //   {
+      //     name:student.name,
+      //     email:student.email,
+      //     password:student.password,
+      //     role:"student",
+      //     // erp_no: student.erp_no ? student.erp_no : null,
+      //     academic_status: student.academic_status,
+      //     phone_no: student.phone_no,
+      //     address: student.address,
+      //     gender:  student.gender,
+      //     college_year: student.college_year,
+      //     class: student.class,
+      //     rollNo: student.rollNo,
+      //     aadhar_card_no: student.aadhar_card_no,
+      //     fees_status: student.fees_status,
+          
+      //   }
+      // )
+      const newuser = new Student(studentDataWithoutId)
       await newuser.save();
-      res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
+      res.status(200).json({success:true,message:"Login Successful" ,user: newUser, token: token });
     }
   } catch (err) {
     res.status(500).json({ error: "Server error " + err });

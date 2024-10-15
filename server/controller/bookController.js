@@ -4,12 +4,25 @@ const Transaction = require('../models/Transaction');
 exports.createBook = async (req, res) => {
   try {
     const { title, author, description, price, condition, status } = req.body;
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).json({ message: 'No files were uploaded.' });
+  }
+
+  // Get the image from the request
+  const imageFile = req.files.photo; // 'photo' is the name attribute of the input field
+
+  // Upload the image to Cloudinary
+  const book_image = await cloudinary.uploader.upload(imageFile.tempFilePath, {
+      public_id: 'uploaded_image_' + Date.now(), // Optional: generate a unique public ID
+      folder: 'uploads', // Optional: save in specific folder on Cloudinary
+  });
     const book = new Book({
       title,
       author,
       description,
       price,
       condition,
+      book_image,
       status,
       listedBy: req.user._id
     });
