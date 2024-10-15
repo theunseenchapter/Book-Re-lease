@@ -25,7 +25,7 @@ const bookSchema = new Schema({
   condition: { 
     type: String,
     enum: ['New', 'Good', 'Fair', 'Poor'],
-    default: 'Good'
+    default: 'New'
   },
   status: { 
     type: String,
