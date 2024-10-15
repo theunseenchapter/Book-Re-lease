@@ -6,12 +6,7 @@ const auth = require('../middleware/authMiddleware');
 router.get('/get-allbooks', bookController.getAllBooks);
 router.get('/:bookId', bookController.getBookById);
 
-router.post('/create-book', (req, res, next) => {
-   if (req.role !== 'student') {
-    return res.status(403).json({ error: 'Access denied' });
-  }
-  next();
-}, bookController.createBook);
+router.post('/create-book',auth, bookController.createBook);
 
 router.put('/:bookId', auth, (req, res, next) => {
   if (req.role !== 'student') {

@@ -1,42 +1,46 @@
 const Book = require('../models/Books');
 const Transaction = require('../models/Transaction');
+const Student = require("../models/Student");
 
 exports.createBook = async (req, res) => {
+  console.log("user id: " + req.userId)
+
   try {
+    console.log("creating books........")
     const { title, author, description, price, condition, status } = req.body;
-    if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).json({ message: 'No files were uploaded.' });
-  }
+  //   if (!req.files || Object.keys(req.files).length === 0) {
+  //     return res.status(400).json({ message: 'No files were uploaded.' });
+  // }
 
-  // Get the image from the request
-  const imageFile = req.files.photo; // 'photo' is the name attribute of the input field
+  // // Get the image from the request
+  // const imageFile = req.files.photo; // 'photo' is the name attribute of the input field
 
-  // Upload the image to Cloudinary
-  const book_image = await cloudinary.uploader.upload(imageFile.tempFilePath, {
-      public_id: 'uploaded_image_' + Date.now(), // Optional: generate a unique public ID
-      folder: 'uploads', // Optional: save in specific folder on Cloudinary
-  });
+  // // Upload the image to Cloudinary
+  // const book_image = await cloudinary.uploader.upload(imageFile.tempFilePath, {
+  //     public_id: 'uploaded_image_' + Date.now(), // Optional: generate a unique public ID
+  //     folder: 'uploads', // Optional: save in specific folder on Cloudinary
+  // });
     const book = new Book({
       title,
       author,
       description,
       price,
       condition,
-      book_image,
       status,
-      listedBy: req.user._id
+      listedBy: req.userId
     });
     await book.save();
     res.status(201).json({ message: 'Book listed successfully', book });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.log(err)
+    res.status(500).json({ error: 'Server error here', err: err });
   }
 };
 
 exports.getAllBooks = async (req, res) => {
   console.log("hitting me?")
   try {
-    const books = await Book.find({ status: 'Available' }).populate('listedBy', 'name email');
+    const books = await Book.find({ status: 'Available' }).populate('listedBy', 'name email class phone_no');
     res.status(200).json(books);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

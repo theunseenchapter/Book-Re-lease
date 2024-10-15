@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const Student = require("../models/Student");
+const ClgStudent = require("../models/ClgStudent");
+
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
@@ -31,7 +34,7 @@ const bookSchema = new Schema({
   },
   listedBy: { 
     type: Schema.Types.ObjectId,
-    ref: 'Student',
+    ref: 'ClgStudent',
     required: true
   },
   borrower: { 
