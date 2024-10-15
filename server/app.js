@@ -17,7 +17,7 @@ const server = http.createServer(app);
 app.set("view engine", "ejs");
 
 // Set the directory for static files
-// app.use(express.static("public"));
+ app.use(express.static("public"));
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware setup
