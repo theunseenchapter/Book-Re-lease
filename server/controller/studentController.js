@@ -5,13 +5,15 @@ const JWT_SECRET = "IAMCUTE";
 const ClgStudent = require("../models/ClgStudent");
 
 exports.login = async (req, res) => {
+  
   try {
     console.log("hello world");
     const { Number_erp, password } = req.body;
     const student = await ClgStudent.findOne({erp_no: Number_erp });
     console.log("erp"+ Number_erp);
     console.log("password"+ password);
-    console.log("the student : " + student);
+    console.log("this is the student: " + student)
+    console.log("std ErP: " + student.erp_no)
     if (!student) {
       return res.status(400).json({ error: "Invalid credentials" });
     }
@@ -24,12 +26,13 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: student._id, role: "student" }, JWT_SECRET, {
       expiresIn: "30d",
     });
-   
+    const { _id, ...studentDataWithoutId } = student._doc;
+  
     const existingUser = await Student.findOne({erp_no: Number_erp });
     if(existingUser){
+      console.log("this should work");
     res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
     }
-
     else{
       const newuser=new Student(
         {
@@ -37,7 +40,7 @@ exports.login = async (req, res) => {
           email:student.email,
           password:student.password,
           role:"student",
-          erp_no:student.erp_no,
+          // erp_no: student.erp_no ? student.erp_no : null,
           academic_status: student.academic_status,
           phone_no: student.phone_no,
           address: student.address,
@@ -50,8 +53,9 @@ exports.login = async (req, res) => {
           
         }
       )
+      const newuser = new Student(studentDataWithoutId)
       await newuser.save();
-      res.status(200).json({success:true,message:"Login Successful" ,user: student, token: token });
+      res.status(200).json({success:true,message:"Login Successful" ,user: newUser, token: token });
     }
   } catch (err) {
     res.status(500).json({ error: "Server error " + err });

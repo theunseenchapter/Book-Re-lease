@@ -31,27 +31,33 @@
     </div>
 
     <script>
-        const apiUrl = 'http://localhost:3000';
+        const apiUrl = 'http://localhost:3001'; // Ensure this matches your server configuration
 
-        // Function to load books
+        // Function to load books based on the query
         function loadBooks(query = '') {
-            fetch(`${apiUrl}/search?query=${encodeURIComponent(query)}`, {
+            fetch("api/books/get-allbooks", {
+                method:"GET",
                 credentials: 'include'
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 displayBooks(data);
             })
             .catch(error => {
                 console.error('Error fetching books:', error);
-                document.getElementById('booksList').innerHTML = '<p>public.</p>';
+                document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again.</p>';
             });
         }
 
-        // Function to display books
+        // Function to display the list of books
         function displayBooks(books) {
             const booksDiv = document.getElementById('booksList');
-            booksDiv.innerHTML = ''; // Clear previous books
+            booksDiv.innerHTML = ''; // Clear previous results
             if (books.length === 0) {
                 booksDiv.innerHTML = '<p>No books available.</p>';
             } else {
@@ -92,7 +98,15 @@
         // Event listener for search
         document.getElementById('searchButton').addEventListener('click', function() {
             const query = document.getElementById('searchInput').value.trim();
-            loadBooks(query); // Load books with the search query
+            loadBooks(query); // Load books based on the user's search query
+        });
+
+        // Optional: Search on Enter key press
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const query = event.target.value.trim();
+                loadBooks(query); // Load books based on the user's search query
+            }
         });
     </script>
 </body>

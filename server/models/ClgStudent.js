@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 
 const clgStudentSchema = new mongoose.Schema({
-  erp_no: { type: Number, required: true, unique: true },
+  erp_no: { type: Number, required: true,  },
   password: { type: String, required: true },
   name: { type: String, required: true },
   dob: { type: Date, required: true },

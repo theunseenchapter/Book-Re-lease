@@ -5,52 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/index1.css">
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-    <%- include('navbar');-%>
+    <header>
+        <h1>Profile</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="browse">Browse Books</a></li>
+                <li><a href="index">Post Your Book</a></li>
+                <li><a href="profile">Profile</a></li>
+                <li><a href="login" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
     
     <div class="container">
-        <div class="profile-container">
-            <div class="profile-info">
-                <h2>User Information</h2>
-                <div class="profile-item">
-                    <h3>Name: <span><%= user.name %></span></h3>
-                </div>
-                <div class="profile-item">
-                    <h3>Class: <span><%= user.class %></span></h3>
-                </div>
-                <div class="profile-item">
-                    <h3>College Year: <span><%= user.collegeYear %></span></h3>
-                </div>
-                <div class="profile-item">
-                    <h3>Roll No: <span><%= user.rollNo %></span></h3>
-                </div>
-                <div class="profile-item">
-                    <h3>Email: <span><%= user.email %></span></h3>
-                </div>
-                <div class="profile-item">
-                    <h3>Phone No: <span><%= user.phone %></span></h3>
-                </div>
+        <section class="profile-info" id="profile-info">
+            <h2>User Information</h2>
+            <div class="profile-item">
+                <h3>Name: <span id="userName"></span></h3>
             </div>
-            <div class="published-books">
-                <h2>Published Books</h2>
-                <div id="publishedBooks">
-                    <% if (user.books.length === 0) { %>
-                        <p>No books published.</p>
-                    <% } else { %>
-                        <% user.books.forEach(function(book) { %>
-                            <div class="book-item">
-                                <h4><%= book.title %></h4>
-                                <p>Author: <%= book.author %></p>
-                                <p>Type: <%= book.type %></p>
-                                <p>Price: $<%= book.price %></p>
-                            </div>
-                        <% }) %>
-                    <% } %>
-                </div>
+            <div class="profile-item">
+                <h3>Class: <span id="userClass"></span></h3> 
             </div>
-        </div>
+            <div class="profile-item">
+                <h3>College Year: <span id="userCollegeYear"></span></h3>
+            </div>
+            <div class="profile-item">
+                <h3>Roll No: <span id="userRollNo"></span></h3> 
+            </div>
+            <div class="profile-item">
+                <h3>Email: <span id="userEmail"></span></h3>
+            </div>
+            <div class="profile-item">
+                <h3>Phone No: <span id="userPhoneNo"></span></h3>
+            </div>
+            <div class="profile-item">
+                <h3>Gender: <span id="userGender"></span></h3>
+            </div>
+            <div class="profile-item">
+                <h3>Fees Status: <span id="userFeesStatus"></span></h3> 
+            </div>
+            <div class="profile-item">
+                <h3>Academic Status: <span id="userAcademicStatus"></span></h3>
+            </div>
+            <div class="profile-item">
+                <h3>Address: <span id="userAddress"></span></h3> 
+            </div>
+            <div class="profile-item" id="aadharContainer" style="display:none;">
+                <h3>Aadhar Card No: <span id="userAadharCardNo"></span></h3> 
+            </div>
+        </section>
     </div>
+
+    <script>
+        // Fetch user data
+        const token = localStorage.getItem('token');
+        fetch('/profile', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const user = data.user;
+                
+                // Populate user information in the profile
+                document.getElementById('userName').innerText = user.name || 'N/A';
+                document.getElementById('userClass').innerText = user.class || 'N/A';
+                document.getElementById('userCollegeYear').innerText = user.college_year || 'N/A';
+                document.getElementById('userRollNo').innerText = user.rollNo || 'N/A';
+                document.getElementById('userEmail').innerText = user.email || 'N/A';
+                document.getElementById('userPhoneNo').innerText = user.phone_no || 'N/A';
+                document.getElementById('userGender').innerText = user.gender || 'N/A';
+                document.getElementById('userFeesStatus').innerText = user.fees_status || 'N/A';
+                document.getElementById('userAcademicStatus').innerText = user.academic_status || 'N/A';
+                document.getElementById('userAddress').innerText = user.address || 'N/A';
+
+                // Show Aadhar Card No if it exists
+                if (user.aadhar_card_no) {
+                    document.getElementById('userAadharCardNo').innerText = user.aadhar_card_no;
+                    document.getElementById('aadharContainer').style.display = 'block';
+                }
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while fetching user data. Please try again.');
+        });
+
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', function(e) {
+            e.preventDefault();
+            fetch('/logout', {
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = 'login'; // Redirect to login page
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>

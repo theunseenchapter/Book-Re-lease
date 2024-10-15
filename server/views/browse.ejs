@@ -4,52 +4,270 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Books</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="browse.css">
+   <style>
+    /* Global Styles */
+:root {
+    --primary-color: rgba(0, 51, 102, 0.95); /* Bright Blue */
+    --secondary-color: rgba(80, 227, 194, 0.9); /* Light Teal */
+    --background-color: rgba(244, 244, 244, 0.95); /* Light Grey */
+    --text-color: #333; /* Dark Charcoal */
+    --border-color: #ddd; /* Light Border */
+    --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly Darker Shadow */
+}
+
+/* Universal Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('/giammarco-boscaro-zeH-ljawHtg-unsplash.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+nav {
+    margin-top: 1rem;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-menu li {
+    margin: 0 1rem;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-menu a:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+/* Container Styles */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    height: calc(100vh - 60px); /* Adjust height for the header */
+}
+
+/* Split Container Styles */
+.split-container {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+}
+
+.half-page {
+    width: 90%; /* Use more space */
+    max-width: 600px; /* Limit max width */
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    margin: 0 auto; /* Center the section */
+    top:-10px;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Heading Styles */
+h2 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Input, Select, and Button Styles */
+input, select, button {
+    max-width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    
+}
+
+input:focus, select:focus, button:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    align-items: end;
+}
+
+button:hover {
+    background-color: rgba(0, 51, 102, 1);
+    transform: scale(1.02);
+}
+
+button.short {
+    width: auto; 
+    padding: 0.5rem 1rem;
+}
+
+/* Book Item Styles */
+.book-item {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.book-item h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+}
+
+.book-item p {
+    margin: 0.25rem 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+    }
+
+    .half-page {
+        width: 100%;
+    }
+}
+.search-bar {
+    margin-left: auto;
+    width: fit-content;
+    margin-bottom: 1.5rem; /* Space below the search bar */
+}
+
+.search-bar input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px 0 0 4px; /* Rounded corners on the left */
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.search-bar button {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0 4px 4px 0; /* Rounded corners on the right */
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: rgba(0, 51, 102, 1);
+}
+
+   </style>
+ 
 </head>
 <body>
     <header>
         <h1>Book Re-Lease</h1>
         <nav>
             <ul class="nav-menu">
-                <li><a href="browse.html">Browse Books</a></li>
-                <li><a href="index.html">Post Your Book</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="login.html" id="logout">Logout</a></li>
+                <li><a href="browse">Browse Books</a></li>
+                <li><a href="index">Post Your Book</a></li>
+                <li><a id="profile">Profile</a></li>
+                <li><a href="login" id="logout">Logout</a></li>
             </ul>
         </nav>
     </header>
-    <div class="container">
+
+    <main class="container">
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search for books..." />
             <button id="searchButton">Search</button>
         </div>
+
         <section id="books-dashboard">
             <h2>Books Available</h2>
             <div id="booksList"></div>
         </section>
-    </div>
+    </main>
 
     <script>
-        const apiUrl = 'http://localhost:3001';
 
-        // Function to load books
+        // Load books from the API
         function loadBooks(query = '') {
-            fetch(`${apiUrl}/api/books/get-allbooks`, {
-                credentials: 'include'
+            fetch(`/api/books/get-allbooks`, {
+                // headers: {
+                //     // 'Authorization': `Bearer ${localStorage.getItem('token')}`, // Fetch token from local storage
+                //     'Content-Type': 'application/json' // Specify content type
+                // },
+                credentials: 'include',
             })
-            .then(response => response.json())
-            .then(data => {
-                displayBooks(data);
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
             })
+            .then(data => displayBooks(data))
             .catch(error => {
                 console.error('Error fetching books:', error);
-                console.log("error is"+error);
-            document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again later.</p>';
+                document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again later.</p>';
             });
         }
 
-        // Function to display books
+        // Display books in the UI
         function displayBooks(books) {
             const booksDiv = document.getElementById('booksList');
             booksDiv.innerHTML = ''; // Clear previous books
@@ -64,7 +282,7 @@
                         <p>Author: ${book.author}</p>
                         <p>Type: ${book.type}</p>
                         <p>Price: $${book.price}</p>
-                        ${book.book_image ? `<img src="${apiUrl}/uploads/${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
+                        ${book.book_image ? `<img src="$/api/books/get-allbooks/uploads/${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
                         <button class="book-btn" data-book-id="${book.id}">Book Your Book</button>
                     `;
                     booksDiv.appendChild(bookItem);
@@ -73,28 +291,49 @@
         }
 
         // Load books when the page loads
-        window.onload = () => loadBooks();
+        window.onload = loadBooks;
 
         // Logout functionality
         document.getElementById('logout').addEventListener('click', function(e) {
             e.preventDefault();
-            fetch(`${apiUrl}/logout`, {
-                credentials: 'include'
+            sessionStorage.clear();
+            fetch(`/api/logout`, {
+                method:"POST",
+                credentials: 'include',
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = '../views/login.html'; // Redirect to login page
+                    window.location.href = '/login'; // Redirect to login page
                 }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Error during logout:', error));
         });
 
-        // Event listener for search
+        // Event listener for search button
         document.getElementById('searchButton').addEventListener('click', function() {
             const query = document.getElementById('searchInput').value.trim();
             loadBooks(query); // Load books with the search query
         });
+
+        document.getElementById("profile").addEventListener("click", function (e) {
+            e.preventDefault();
+            const user = sessionStorage.getItem("user");
+            fetch("/profile", {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json', // Set the content type to JSON
+                },
+                credentials: 'include', // Include credentials for cookies or session handling
+                user: JSON.stringify(user)
+            }).then(response => {
+            return response.json(); // Parse the response as JSON
+        }).then(data => {
+                console.log('Success:', data);
+                // Handle the success response, like redirecting or updating the UI
+            })
+            .catch(error => console.error('Error:', error)); // Handle errors
+        })
     </script>
 </body>
 </html>

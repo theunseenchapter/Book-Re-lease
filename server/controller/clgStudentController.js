@@ -1,4 +1,5 @@
 const ClgStudent = require('../models/ClgStudent');
+const Student = require('../models/Student');
 
 
 exports.bulkUpload = async (req, res) => {

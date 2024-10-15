@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 const studentSchema = new Schema({
   erp_no: {
     type: Number,
-    required: true,
-    unique: true
+    required: false,
   },
   password: {
     type: String,
