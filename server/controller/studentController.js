@@ -8,7 +8,7 @@ exports.login = async (req, res) => {
   try {
     console.log("hello world");
     const { Number_erp, password } = req.body;
-
+    
     const clgStudent = await ClgStudent.findOne({ erp_no: Number_erp });
     
     if (!clgStudent) {
@@ -74,8 +74,11 @@ exports.login = async (req, res) => {
 };
 
 exports.getProfile = async (req, res) => {
+  console.log("hitting me ?? here in get profile?  ")
   try {
-    const student = await Student.findById(req.user._id).select("-password");
+    console.log("userId " + req.userId)
+    const student = await ClgStudent.findById(req.userId).select("-password");
+    console.log("the studen in get profile: " + student)
     res.json(student);
   } catch (err) {
     res.status(500).json({ error: "Server error" });

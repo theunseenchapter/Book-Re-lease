@@ -248,19 +248,24 @@ button.short {
         // Load books from the API
         function loadBooks(query = '') {
             fetch(`/api/books/get-allbooks`, {
-                // headers: {
-                //     // 'Authorization': `Bearer ${localStorage.getItem('token')}`, // Fetch token from local storage
-                //     'Content-Type': 'application/json' // Specify content type
-                // },
                 credentials: 'include',
             })
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                return response.json();
+                return response.text(); // Get response as text
             })
-            .then(data => displayBooks(data))
+            .then(text => {
+                try {
+                    const data = JSON.parse(text); // Try to parse the text as JSON
+                    displayBooks(data);
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                    console.log('Response text:', text); // Log the response text
+                    document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again later.</p>';
+                }
+            })
             .catch(error => {
                 console.error('Error fetching books:', error);
                 document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again later.</p>';
@@ -315,6 +320,8 @@ button.short {
             .catch(error => console.error('Error during logout:', error));
         });
 
+        console.log("token here : " + sessionStorage.getItem('token'));
+
         // Event listener for search button
         document.getElementById('searchButton').addEventListener('click', function() {
             const query = document.getElementById('searchInput').value.trim();
@@ -324,21 +331,32 @@ button.short {
         document.getElementById("profile").addEventListener("click", function (e) {
             e.preventDefault();
             const user = sessionStorage.getItem("user");
-            fetch("/profile", {
-                method: "GET",
+            if (!user) {
+                alert('User data not found. Please log in again.');
+                window.location.href = '/login'; 
+                return;
+            }
+            fetch("/api/students/profile", {
+               method: "GET",
                 headers: {
-                    'Content-Type': 'application/json', // Set the content type to JSON
+                    'Content-Type': 'application/json', 
+                    'Authorization': `${sessionStorage.getItem('token')}` 
                 },
-                credentials: 'include', // Include credentials for cookies or session handling
-                user: JSON.stringify(user)
+                credentials: 'include',
             }).then(response => {
-            return response.json(); // Parse the response as JSON
-        }).then(data => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json(); // Get response as JSON
+            }).then(data => {
                 console.log('Success:', data);
                 // Handle the success response, like redirecting or updating the UI
-            })
-            .catch(error => console.error('Error:', error)); // Handle errors
-        })
+                window.location.href = '/profile'; // Redirect to profile page
+            }).catch(error => {
+                console.error('Error:', error); // Handle errors
+                alert('Error fetching profile data. Please try again later.');
+            });
+        });
     </script>
 </body>
 </html>
