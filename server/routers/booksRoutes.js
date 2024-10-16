@@ -33,7 +33,7 @@ router.delete('/:bookId', auth, (req, res, next) => {
 
 
 // Buying and Lending
-router.post('/buy/:bookId', bookController.buyBook);
+router.post('/buy/:bookId',auth, bookController.buyBook);
 
 router.post('/:bookId/lend', auth, (req, res, next) => {
   if (req.role !== 'student') {

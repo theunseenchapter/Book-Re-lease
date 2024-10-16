@@ -266,12 +266,23 @@ button.short {
                     document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again later.</p>';
                 }
             })
+<<<<<<< HEAD
+=======
+            .then(data => 
+           
+            {
+                localStorage.setItem("data", JSON.stringify(data))
+                displayBooks(data)
+
+
+            })
+>>>>>>> 14516f81bf6b46cc8989553e08743427f3b9925a
             .catch(error => {
                 console.error('Error fetching books:', error);
                 document.getElementById('booksList').innerHTML = '<p>Error fetching books. Please try again later.</p>';
             });
         }
-
+        var something = "Sold"
         // Display books in the UI
         function displayBooks(books) {
             const booksDiv = document.getElementById('booksList');
@@ -279,6 +290,7 @@ button.short {
             if (books.length === 0) {
                 booksDiv.innerHTML = '<p>No books available.</p>';
             } else {
+                console.log("key1 : " + localStorage.getItem("key"))
                 books.forEach(book => {
                     const bookItem = document.createElement('div');
                     bookItem.className = 'book-item';
@@ -287,23 +299,37 @@ button.short {
                         <p>Author: ${book.author}</p>
                         <p>Type: ${book.type}</p>
                         <p>Price: &#8377;${book.price * 80}</p>
-                        <p>
+                        <p> 
                             Posted by: ${book?.listedBy?.name} <br>
                             Contact: ${book?.listedBy?.phone_no} | ${book?.listedBy?.email} <br>
                             Class: ${book?.listedBy?.class}
                         </p>
                         ${book.book_image ? `<img src="${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
-                        <button class="book-btn" data-book-id="${book._id}">Book Your Book</button>
+                        ${localStorage.getItem("key") == 1?  `<button onclick= "showAlert()" class="book-btn" data-book-id="${book._id}">Available</button>` :  `<button onclick="showAlert()" class="book-btn" data-book-id="${book._id}">Sold</button> `}
                     `;
                     booksDiv.appendChild(bookItem);
                 });
             }
         }
 
+         var myBool = false;
+         localStorage.setItem("key", 1)
+            function showAlert() {
+                myBool = !myBool
+            console.log("bool : " + myBool)
+            let two = 2;
+            localStorage.setItem("key", two)
+            console.log("the key: " + localStorage.getItem("key"))
+            displayBooks(JSON.parse(localStorage.getItem("data")))
+            
+
+        var myText = "The book is Purchased Successfully";
+        alert (myText);
+    }
+
         // Load books when the page loads
         window.onload = loadBooks;
 
-        // Logout functionality
         document.getElementById('logout').addEventListener('click', function(e) {
             e.preventDefault();
             sessionStorage.clear();
@@ -314,7 +340,7 @@ button.short {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = '/login'; // Redirect to login page
+                    window.location.href = '/login'; 
                 }
             })
             .catch(error => console.error('Error during logout:', error));
