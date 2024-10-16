@@ -270,7 +270,7 @@ button.short {
         // Display books in the UI
         function displayBooks(books) {
             const booksDiv = document.getElementById('booksList');
-            booksDiv.innerHTML = ''; // Clear previous books
+            booksDiv.innerHTML = ''; 
             if (books.length === 0) {
                 booksDiv.innerHTML = '<p>No books available.</p>';
             } else {
@@ -281,9 +281,14 @@ button.short {
                         <h3>${book.title}</h3>
                         <p>Author: ${book.author}</p>
                         <p>Type: ${book.type}</p>
-                        <p>Price: $${book.price}</p>
-                        ${book.book_image ? `<img src="$/api/books/get-allbooks/uploads/${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
-                        <button class="book-btn" data-book-id="${book.id}">Book Your Book</button>
+                        <p>Price: &#8377;${book.price * 80}</p>
+                        <p>
+                            Posted by: ${book?.listedBy?.name} <br>
+                            Contact: ${book?.listedBy?.phone_no} | ${book?.listedBy?.email} <br>
+                            Class: ${book?.listedBy?.class}
+                        </p>
+                        ${book.book_image ? `<img src="${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
+                        <button class="book-btn" data-book-id="${book._id}">Book Your Book</button>
                     `;
                     booksDiv.appendChild(bookItem);
                 });

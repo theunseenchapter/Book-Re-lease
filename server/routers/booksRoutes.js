@@ -2,11 +2,18 @@ const express = require('express');
 const router = express.Router();
 const bookController = require('../controller/bookController');
 const auth = require('../middleware/authMiddleware');
+const multer = require('multer');
+// const cloudinary = require('../Cloudinary')
 
-router.get('/:get-allbooks', bookController.getAllBooks);
+// Configure multer to handle file uploads
+const upload = multer({ dest: 'uploads/' }); // Choose the directory for saving uploaded files
+
+// POST route for handling book creation
+router.post('/create-book', auth, upload.single('photo'), bookController.createBook);
+router.get('/get-allbooks', bookController.getAllBooks);
 router.get('/:bookId', bookController.getBookById);
 
-router.post('/create-book',auth, bookController.createBook);
+// router.post('/create-book',auth, bookController.createBook);
 
 router.put('/:bookId', auth, (req, res, next) => {
   if (req.role !== 'student') {

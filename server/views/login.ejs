@@ -179,8 +179,8 @@ header h1 {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    sessionStorage.setItem('user',JSON.stringify(data.user));
-                    sessionStorage.setItem('token',data.token);
+                    localStorage.setItem('user',JSON.stringify(data.user));
+                    localStorage.setItem('token',data.token);
                     window.location.href = '/index';
                 } else {
                     alert(data.message);

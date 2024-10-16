@@ -177,15 +177,15 @@
             <section id="post" class="half-page center">
                 <h2>Post Your Book</h2>
                 <form id="postBookForm">
-                    <input type="text" id="bookTitle" placeholder="Book Title" required>
-                    <input type="text" id="bookAuthor" placeholder="Author" required>
-                    <select id="bookType" required>
+                    <input type="text" id="bookTitle" name="bookTitle" placeholder="Book Title" required>
+                    <input type="text" id="bookAuthor" name="bookAuthor" placeholder="Author" required>
+                    <select id="bookType" name="bookType" required>
                         <option value="" disabled selected>Select Type</option>
                         <option value="sell">Sell</option>
                         <option value="rent">Rent</option>
                     </select>
-                    <input type="number" id="bookPrice" placeholder="Price" required min="0">
-                    <input type="file" id="bookPhoto" accept="image/*" required>
+                    <input type="number" id="bookPrice" name="bookPrice" placeholder="Price" required min="0">
+                    <input type="file" id="bookPhoto" name="bookPhoto" accept="image/*" required>
                     <button class="short" type="submit">Post Book</button>
                 </form>
             </section>
@@ -213,9 +213,8 @@
         });
 
         // Event listener for posting a new book
-        document.getElementById('postBookForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
+        const form = document.getElementById('postBookForm');
+        form.addEventListener('submit', function(e) {
             // Get form data
             const formData = new FormData();
             formData.append('title', document.getElementById('bookTitle').value.trim());
@@ -223,6 +222,7 @@
             formData.append('type', document.getElementById('bookType').value);
             formData.append('price', parseFloat(document.getElementById('bookPrice').value));
             formData.append('photo', document.getElementById('bookPhoto').files[0]);
+
 
             // Validate file input
             const fileInput = document.getElementById('bookPhoto');
@@ -234,7 +234,10 @@
             // Send POST request
             fetch('/api/books/create-Book', {
                 method: 'POST',
-                body: formData
+                body: formData,
+                headers: {
+                    authorization: localStorage.getItem('token')
+                }
             })
             .then(response => response.json())
             .then(data => {
@@ -249,6 +252,7 @@
                 console.error('Error:', error);
                 alert('An error occurred. Please try again.');
             });
+            e.preventDefault();
         });
     </script>
 </body>
