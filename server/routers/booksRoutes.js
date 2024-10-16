@@ -26,12 +26,7 @@ router.delete('/:bookId', auth, (req, res, next) => {
 
 
 // Buying and Lending
-router.post('/:bookId/buy', auth, (req, res, next) => {
-  if (req.role !== 'student') {
-    return res.status(403).json({ error: 'Access denied' });
-  }
-  next();
-}, bookController.buyBook);
+router.post('/buy/:bookId', bookController.buyBook);
 
 router.post('/:bookId/lend', auth, (req, res, next) => {
   if (req.role !== 'student') {

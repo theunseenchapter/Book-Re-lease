@@ -99,27 +99,31 @@ exports.deleteBook = async (req, res) => {
 };
 
 exports.buyBook = async (req, res) => {
+
   try {
     const { bookId } = req.params;
+    console.log("there ? ")
 
     const book = await Book.findById(bookId);
     if (!book || book.status !== 'Available') {
-      return res.status(400).json({ error: 'Book is not available for buying' });
+      console.log("book is already sold")
+      return res.status(200).json({ msg: 'Book is not available for buying' });
     }
 
     book.status = 'Sold';
     await book.save();
 
-    const transaction = new Transaction({
-      book: book._id,
-      buyer: req.user._id,
-      transactionType: 'buy',
-      status: 'completed'
-    });
-    await transaction.save();
+    // const transaction = new Transaction({
+    //   book: book._id,
+    //   buyer: req.user._id,
+    //   transactionType: 'buy',
+    //   status: 'completed'
+    // });
+    // await transaction.save();
 
     res.json({ message: 'Book bought successfully', transaction });
   } catch (err) {
+    console.log("error: " + err)
     res.status(500).json({ error: 'Server error' });
   }
 };
