@@ -10,7 +10,7 @@ const auth = async (req, res, next) => {
     return res.status(401).json({ message: "No token provided" });
   }
 
-  const token = authHeader.split(" ")[1];
+  const token = authHeader;
   console.log("token: " + token);
   if (!token) {
     return res.status(401).json({ error: "Authentication token missing" });

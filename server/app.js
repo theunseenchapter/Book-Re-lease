@@ -21,9 +21,11 @@ app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware setup
-app.use(express.json());
-app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors());
+
 
 // MongoDB connection
 const dbName = "bookstore";
@@ -52,7 +54,7 @@ app.use((req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3009;
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

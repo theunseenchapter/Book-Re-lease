@@ -1,6 +1,7 @@
 const Book = require('../models/Books');
 const Transaction = require('../models/Transaction');
 const Student = require("../models/Student");
+const cloudinary = require('../Cloudinary');
 
 exports.createBook = async (req, res) => {
   console.log("user id: " + req.userId)
@@ -8,11 +9,12 @@ exports.createBook = async (req, res) => {
   try {
     console.log("creating books........")
     const { title, author, description, price, condition, status } = req.body;
+    console.log(req.body);
   //   if (!req.files || Object.keys(req.files).length === 0) {
   //     return res.status(400).json({ message: 'No files were uploaded.' });
   // }
 
-  // // Get the image from the request
+  // Get the image from the request
   // const imageFile = req.files.photo; // 'photo' is the name attribute of the input field
 
   // // Upload the image to Cloudinary
@@ -24,7 +26,7 @@ exports.createBook = async (req, res) => {
       title,
       author,
       description,
-      price,
+      price: parseInt(price),
       condition,
       status,
       listedBy: req.userId

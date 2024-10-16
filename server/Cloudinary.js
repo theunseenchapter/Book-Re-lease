@@ -1,7 +1,7 @@
-import express from 'express';
-import { v2 as cloudinary } from 'cloudinary';
-import fileUpload from 'express-fileupload';
-import dotenv from 'dotenv';
+const express = require('express');
+const { v2: cloudinary } = require('cloudinary');
+const fileUpload = require('express-fileupload');
+const dotenv = require('dotenv');
 
 dotenv.config(); // Load environment variables
 
