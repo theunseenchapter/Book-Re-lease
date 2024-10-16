@@ -49,8 +49,9 @@ exports.getAllBooks = async (req, res) => {
 
 exports.getBookById = async (req, res) => {
   try {
+    console.log("working");
     const { bookId } = req.params;
-    const book = await Book.findById(bookId).populate('listedBy', 'name email');
+    const book = await Book.findById(bookId).populate('listedBy', 'name email phone_no class');
     if (!book) {
       return res.status(404).json({ error: 'Book not found' });
     }

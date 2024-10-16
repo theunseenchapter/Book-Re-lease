@@ -30,10 +30,7 @@ const dbName = "bookstore";
 const dbURI = `mongodb+srv://oscar:I6TUsF3dLRLBkZ8P@oscar.rvxt1.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 mongoose
-  .connect(dbURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(dbURI)
   .then(() => console.log(`MongoDB connected to ${dbName} database`))
   .catch((err) => console.error("MongoDB connection error:", err));
 
