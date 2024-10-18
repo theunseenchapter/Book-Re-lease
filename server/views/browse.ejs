@@ -276,32 +276,90 @@ button.short {
         }
 
         // Display books in the UI
+        // function displayBooks(books) {
+        //     const booksDiv = document.getElementById('booksList');
+        //     booksDiv.innerHTML = ''; 
+        //     if (books.length === 0) {
+        //         booksDiv.innerHTML = '<p>No books available.</p>';
+        //     } else {
+        //         books.forEach(book => {
+        //             const bookItem = document.createElement('div');
+        //             bookItem.className = 'book-item';
+        //             bookItem.innerHTML = `
+        //                 <h3>${book.title}</h3>
+        //                 <p>Author: ${book.author}</p>
+        //                 <p>Type: ${book.tradeType}</p>
+        //                 <p>Price: &#8377;${book.price}</p>
+        //                 <p>
+        //                     Posted by: ${book?.listedBy?.name} <br>
+        //                     Contact: ${book?.listedBy?.phone_no} | ${book?.listedBy?.email} <br>
+        //                     Class: ${book?.listedBy?.class}
+        //                 </p>
+        //                 ${book.book_image ? `<img src="${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
+        //                 <button class="book-btn" data-book-id="${book._id}">Book Your Book</button>
+        //             `;
+        //             booksDiv.appendChild(bookItem);
+        //         });
+        //     }
+        // }
+
         function displayBooks(books) {
-            const booksDiv = document.getElementById('booksList');
-            booksDiv.innerHTML = ''; 
-            if (books.length === 0) {
-                booksDiv.innerHTML = '<p>No books available.</p>';
-            } else {
-                books.forEach(book => {
-                    const bookItem = document.createElement('div');
-                    bookItem.className = 'book-item';
-                    bookItem.innerHTML = `
-                        <h3>${book.title}</h3>
-                        <p>Author: ${book.author}</p>
-                        <p>Type: ${book.type}</p>
-                        <p>Price: &#8377;${book.price * 80}</p>
-                        <p>
-                            Posted by: ${book?.listedBy?.name} <br>
-                            Contact: ${book?.listedBy?.phone_no} | ${book?.listedBy?.email} <br>
-                            Class: ${book?.listedBy?.class}
-                        </p>
-                        ${book.book_image ? `<img src="${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
-                        <button class="book-btn" data-book-id="${book._id}">Book Your Book</button>
-                    `;
-                    booksDiv.appendChild(bookItem);
-                });
-            }
+        const booksDiv = document.getElementById('booksList');
+        booksDiv.innerHTML = ''; 
+        const userId = sessionStorage.getItem('userId'); // Assuming userId is stored in session
+
+        if (books.length === 0) {
+            booksDiv.innerHTML = '<p>No books available.</p>';
+        } else {
+            books.forEach(book => {
+                const bookItem = document.createElement('div');
+                bookItem.className = 'book-item';
+
+                // Disable button conditions
+                let buttonLabel = 'Book Your Book';
+                let isButtonDisabled = false;
+                
+                if (book.status === 'Sold') {
+                    buttonLabel = 'Already Sold';
+                    isButtonDisabled = true;
+                } else if (book.tradeType === 'rent' && book.status !== 'Available') {
+                    buttonLabel = 'Wait for Your Turn';
+                    isButtonDisabled = true;
+                }
+
+                // If the user listed the book, disable the button
+                if (book?.listedBy?._id === userId) {
+                    buttonLabel = 'You Posted This';
+                    isButtonDisabled = true;
+                }
+
+                bookItem.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p>Author: ${book.author}</p>
+                    <p>Type: ${book.tradeType}</p>
+                    <p>Price: &#8377;${book.price}</p>
+                    <p>
+                        Posted by: ${book?.listedBy?.name} <br>
+                        Contact: ${book?.listedBy?.phone_no} | ${book?.listedBy?.email} <br>
+                        Class: ${book?.listedBy?.class}
+                    </p>
+                    ${book.book_image ? `<img src="${book.book_image}" alt="${book.title}" style="width:100px;height:150px;">` : ''}
+                    <button class="book-btn" data-book-id="${book._id}" ${isButtonDisabled ? 'disabled' : ''}>${buttonLabel}</button>
+                `;
+                booksDiv.appendChild(bookItem);
+            });
         }
+
+        // Add event listeners to the buttons
+        const bookButtons = document.querySelectorAll('.book-btn');
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const bookId = this.getAttribute('data-book-id');
+                window.location.href = `/book-details/${bookId}`;
+            });
+        });
+    }
+
 
         // Load books when the page loads
         window.onload = loadBooks;

@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require("http");
 const path = require("path");
+const fileUpload = require('express-fileupload');
 
 const app = express();
 const server = http.createServer(app);
@@ -17,6 +18,13 @@ const server = http.createServer(app);
 app.set("view engine", "ejs");
 
 // Set the directory for static files
+
+// this code for uplaoding the files : 
+// app.use(fileUpload({
+//   useTempFiles: true,
+//   tempFileDir: '/tmp/' // Temporary directory for storing files before upload
+// }));
+
  app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 

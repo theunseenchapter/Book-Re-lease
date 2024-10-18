@@ -1,237 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-        :root {
-    --primary-color: rgba(0, 51, 102, 0.95); /* Bright Blue */
-    --secondary-color: rgba(80, 227, 194, 0.9); /* Light Teal */
-    --background-color: rgba(244, 244, 244, 0.95); /* Light Grey */
-    --text-color: #333; /* Dark Charcoal */
-    --border-color: #ddd; /* Light Border */
-    --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly Darker Shadow */
-}
-body {
-    font-family: 'Poppins', sans-serif;
-    background-image: url('/giammarco-boscaro-zeH-ljawHtg-unsplash.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    color: var(--text-color);
-    line-height: 1.6;
-    position: relative;
-    overflow-x: hidden;
-}
-*{
-    
+      :root {
+        --primary-color: rgba(0, 51, 102, 0.95); /* Bright Blue */
+        --secondary-color: rgba(80, 227, 194, 0.9); /* Light Teal */
+        --background-color: rgba(244, 244, 244, 0.95); /* Light Grey */
+        --text-color: #333; /* Dark Charcoal */
+        --border-color: #ddd; /* Light Border */
+        --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly Darker Shadow */
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-image: url("/giammarco-boscaro-zeH-ljawHtg-unsplash.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+        color: var(--text-color);
+        line-height: 1.6;
+        position: relative;
+        overflow-x: hidden;
+      }
+      * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-    
-}
-header {
-    background: rgba(0, 51, 102, 1);
-    padding: 20px;
-    width: 100%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+      }
+      header {
+        background: rgba(0, 51, 102, 1);
+        padding: 20px;
+        width: 100%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-.nav-menu {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-}
+      .nav-menu {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+      }
 
-.container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-}
+      .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+      }
 
-.profile-container {
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 10px;
-    width: 100%;
-    max-width: 800px; /* Limit max width for better aesthetics */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
+      .profile-container {
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+        width: 100%;
+        max-width: 800px; /* Limit max width for better aesthetics */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
 
-.profile-item {
-    margin-bottom: 15px; /* Space between profile items */
-    transition: transform 0.3s ease; /* Transition effect */
-}
+      .profile-item {
+        margin-bottom: 15px; /* Space between profile items */
+        transition: transform 0.3s ease; /* Transition effect */
+      }
 
-.profile-item:hover {
-    transform: scale(1.02); /* Scale up on hover */
-}
+      .profile-item:hover {
+        transform: scale(1.02); /* Scale up on hover */
+      }
 
-.book-item {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0; /* Space between book items */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-.nav-menu {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-}
+      .book-item {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px 0; /* Space between book items */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .nav-menu {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+      }
 
-.nav-menu li {
-    margin: 0 1rem;
-}
+      .nav-menu li {
+        margin: 0 1rem;
+      }
 
-.nav-menu a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
 
-.nav-menu a:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-}
+      .nav-menu a:hover {
+        background-color: var(--secondary-color);
+        transform: scale(1.05);
+      }
 
-.container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-}
-header {
-    background-color: var(--primary-color); 
-    color: white;
-    padding: 1.5rem 0;
-    text-align: center;
-    box-shadow: 0 4px 8px var(--shadow-color);
-}
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+      }
+      header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 1.5rem 0;
+        text-align: center;
+        box-shadow: 0 4px 8px var(--shadow-color);
+      }
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
 
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Aligns items to the top */
+        padding: 20px;
+      }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Aligns items to the top */
-    padding: 20px;
-}
+      .profile-container {
+        display: flex;
+        width: 100%;
+        max-width: 1200px; /* Maximum width for better layout */
+        margin: 0 auto; /* Center the container */
+        gap: 20px; /* Space between columns */
+      }
 
-.profile-container {
-    display: flex;
-    width: 100%;
-    max-width: 1200px; /* Maximum width for better layout */
-    margin: 0 auto; /* Center the container */
-    gap: 20px; /* Space between columns */
-}
+      .profile-info,
+      .published-books {
+        background: rgba(255, 255, 255, 0.6); /* Translucent background */
+        border-radius: 10px;
+        padding: 20px;
+        flex: 1; /* Equal width for both sections */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
 
-.profile-info, .published-books {
-    background: rgba(255, 255, 255, 0.6); /* Translucent background */
-    border-radius: 10px;
-    padding: 20px;
-    flex: 1; /* Equal width for both sections */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
+      .profile-item {
+        margin-bottom: 15px; /* Space between items */
+      }
 
-.profile-item {
-    margin-bottom: 15px; /* Space between items */
-}
+      h2 {
+        text-align: center;
+        margin-bottom: 20px; /* Space below headings */
+      }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px; /* Space below headings */
-}
+      .book-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
 
+      .book-card {
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .book-image {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .book-details {
+        padding: 1rem;
+      }
+
+      .book-details h3 {
+        margin: 0 0 0.5rem;
+      }
+
+      .book-details p {
+        margin: 0.25rem 0;
+      }
+
+      .no-books-message {
+        text-align: center;
+        padding: 2rem;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-top: 1.5rem;
+      }
+
+      .no-books-message h3 {
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      .no-books-message p {
+        margin: 0.5rem 0;
+        font-size: 1rem;
+        color: #666;
+      }
+
+      .browse-button {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+      }
+
+      .browse-button:hover {
+        background-color: #0056b3;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1>Profile</h1>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="browse">Browse Books</a></li>
-                <li><a href="index">Post Your Book</a></li>
-                <li><a id="profile">Profile</a></li>
-                <li><a href="login" id="logout">Logout</a></li>
-            </ul>
-        </nav>
+      <h1>Profile</h1>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="browse">Browse Books</a></li>
+          <li><a href="index">Post Your Book</a></li>
+          <li><a id="profile">Profile</a></li>
+          <li><a href="login" id="logout">Logout</a></li>
+        </ul>
+      </nav>
     </header>
 
     <div class="container">
-        <section class="profile-info">
-            <h2>User Information</h2>
-            <div class="profile-item">
-                <h3>Name: <span id="name"></span></h3>
-            </div>
-            <div class="profile-item">
-                <h3>Class: <span id="class"></span></h3>
-            </div>
-            <div class="profile-item">
-                <h3>College Year: <span id="collegeYear"></span></h3>
-            </div>
-            <div class="profile-item">
-                <h3>Roll No: <span id="rollNo"></span></h3>
-            </div>
-            <div class="profile-item">
-                <h3>Email: <span id="email"></span></h3>
-            </div>
-            <div class="profile-item">
-                <h3>Phone No: <span id="phoneNo"></span></h3>
-            </div>
-        </section>
+      <section class="profile-info">
+        <h2>User Information</h2>
+        <div class="profile-item">
+          <h3>Name: <span id="name"></span></h3>
+        </div>
+        <div class="profile-item">
+          <h3>Class: <span id="class"></span></h3>
+        </div>
+        <div class="profile-item">
+          <h3>College Year: <span id="collegeYear"></span></h3>
+        </div>
+        <div class="profile-item">
+          <h3>Roll No: <span id="rollNo"></span></h3>
+        </div>
+        <div class="profile-item">
+          <h3>Email: <span id="email"></span></h3>
+        </div>
+        <div class="profile-item">
+          <h3>Phone No: <span id="phoneNo"></span></h3>
+        </div>
+      </section>
+
+      <section class="purchased-books">
+        <h2>Purchased Books</h2>
+        <div id="purchased-books-container" class="book-list">
+          <!-- Purchased books will be appended here -->
+        </div>
+      </section>
     </div>
 
     <script>
         // Retrieve the user data from sessionStorage
-        const user = JSON.parse(sessionStorage.getItem('user')); 
+        const user = JSON.parse(sessionStorage.getItem("user"));
         console.log(user); // Parse the user data from sessionStorage
-        
+
         if (user) {
-            // Populate the profile data
-            document.getElementById('name').textContent = user.name;
-            document.getElementById('class').textContent = user.class;
-            document.getElementById('collegeYear').textContent = user.college_year;
-            document.getElementById('rollNo').textContent = user.rollNo;
-            document.getElementById('email').textContent = user.email;
-            document.getElementById('phoneNo').textContent = user.phone_no;
+          // Populate the profile data
+          document.getElementById("name").textContent = user.name;
+          document.getElementById("class").textContent = user.class;
+          document.getElementById("collegeYear").textContent = user.college_year;
+          document.getElementById("rollNo").textContent = user.rollNo;
+          document.getElementById("email").textContent = user.email;
+          document.getElementById("phoneNo").textContent = user.phone_no;
         } else {
-            alert("User data not found. Please log in again.");
-            window.location.href = "/login";
+          alert("User data not found. Please log in again.");
+          window.location.href = "/login";
         }
 
         // Logout functionality
-        document.getElementById('logout').addEventListener('click', function (e) {
-            e.preventDefault();
-            sessionStorage.clear();  // Clear sessionStorage
-            fetch('/api/logout', {
-                method: "POST",
-                credentials: 'include'
+        document.getElementById("logout").addEventListener("click", function (e) {
+          e.preventDefault();
+          sessionStorage.clear(); // Clear sessionStorage
+          fetch("/api/logout", {
+            method: "POST",
+            credentials: "include",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                window.location.href = "/login"; // Redirect to login page
+              }
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = '/login';  // Redirect to login page
+            .catch((error) => console.error("Error:", error));
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+          // Fetch purchased books
+          fetchPurchasedBooks();
+          console.log("token here ? : " + sessionStorage.getItem("token"));
+
+          function fetchPurchasedBooks() {
+            fetch("/api/books/user/get-allmybooks", {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `${sessionStorage.getItem("token")}`,
+              },
+            })
+              .then((response) => {
+          console.log("Raw response:", response);  // Log the full response
+          return response.json();
+      })
+              .then((data) => {
+                const bookContainer = document.getElementById(
+                  "purchased-books-container"
+                );
+                bookContainer.innerHTML = ""; // Clear existing content
+
+                // Check if data is an array (ensure it's not an error object)
+                if (Array.isArray(data) && data.length === 0) {
+                  // Show a custom message when no books are purchased
+                  bookContainer.innerHTML = `
+                  <div class="no-books-message">
+                      <h3>You haven't purchased any books yet!</h3>
+                      <p>Why not browse our collection and find a great book today?</p>
+                      <a href="/browse" class="browse-button">Browse Books</a>
+                  </div>
+              `;
+                } else if (Array.isArray(data)) {
+                  // Display purchased books
+                  displayPurchasedBooks(data);
+                } else {
+                  console.error("Error fetching books:", data);
+                  bookContainer.innerHTML =
+                    "<p>There was an error loading your books. Please try again later.</p>";
                 }
-            })
-            .catch(error => console.error('Error:', error));
+              })
+              .catch((error) => console.error("Error fetching books:", error));
+          }
+
+          function displayPurchasedBooks(books) {
+            const bookContainer = document.getElementById(
+              "purchased-books-container"
+            );
+            bookContainer.innerHTML = ""; // Clear existing content
+
+            books.forEach((book) => {
+              const bookCard = `
+                  <div class="book-card">
+                      <img src="${
+                        book.book_image
+                      }" alt="Book Image" class="book-image">
+                      <div class="book-details">
+                          <h3>${book.title}</h3>
+                          <p><strong>Author:</strong> ${book.author}</p>
+                          <p><strong>Price:</strong> ${book.price}</p>
+                          <p><strong>Purchased on:</strong> ${new Date(
+                            book.purchaseDate
+                          ).toLocaleDateString()}</p>
+                      </div>
+                  </div>
+              `;
+              bookContainer.innerHTML += bookCard;
+            });
+          }
         });
     </script>
-</body>
+  </body>
 </html>

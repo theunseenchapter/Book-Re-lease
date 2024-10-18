@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
 
     console.log("ERP: " + Number_erp);
     console.log("Password: " + password);
-    console.log("Student found in ClgStudent: " + clgStudent);
+    // console.log("Student found in ClgStudent: " + clgStudent);
 
     const isMatch = (password === clgStudent.password);
     if (!isMatch) {

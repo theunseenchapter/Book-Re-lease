@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .book-details {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: center;
+        }
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        p {
+            margin: 0.5rem 0;
+        }
+        button {
+            background-color: var(--primary-color);
+            color: rgb(246, 17, 17);
+            border: none;
+            padding: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-details">
+        <h2 id="bookTitle">Loading...</h2>
+        <p id="bookAuthor"></p>
+        <p id="bookPrice"></p>
+        <p id="bookTradeType"></p>
+        <p id="bookPostedBy"></p>
+        <p id="bookContact"></p>
+        <img id="bookImage" style="width:200px; height:300px;" />
+        <button id="confirmButton" disabled style="display: block;">Confirm</button> <!-- Ensure it's visible -->
+    </div>
+    <script>
+        const bookId = window.location.pathname.split('/').pop();
+
+        // Fetch the book details using bookId
+        fetch(`/api/books/${bookId}`)
+            .then(response => response.json())
+            .then(book => {
+                const loggedInUserId = sessionStorage.getItem('userId');
+
+                // Debugging: Log user ID and listedBy ID for comparison
+                console.log("Logged in User ID:", loggedInUserId);
+                console.log("Listed By User ID:", book.listedBy._id);
+
+                // Ensure both IDs are strings before comparing
+                const bookOwnerId = String(book.listedBy._id);
+                const currentUserId = String(loggedInUserId);
+
+                // Set book details
+                document.getElementById('bookTitle').textContent = book.title;
+                document.getElementById('bookAuthor').textContent = `Author: ${book.author}`;
+                document.getElementById('bookPrice').textContent = `Price: ₹${book.price}`;
+                document.getElementById('bookTradeType').textContent = `Type: ${book.tradeType}`;
+                document.getElementById('bookPostedBy').textContent = `Posted by: ${book.listedBy.name}`;
+                document.getElementById('bookContact').textContent = `Contact: ${book.listedBy.phone_no} | ${book.listedBy.email}`;
+
+                if (book.book_image) {
+                    document.getElementById('bookImage').src = book.book_image;
+                }
+
+                // Check if the book is available and the current user is NOT the uploader
+                if (book.status === 'Available' && bookOwnerId !== currentUserId) {
+                     const confirmButton = document.getElementById('confirmButton');
+                    confirmButton.disabled = false; // Remove disabled
+                    confirmButton.style.display = 'block'; // Ensure it's visible
+                } else {
+                    // Book is either unavailable or the user is the uploader
+                    if (book.status !== 'Available') {
+                        console.log('Book is not available.');
+                    }
+                    if (bookOwnerId === currentUserId) {
+                        console.log('You are the uploader of this book.');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching book details:', error);
+            });
+
+        // Add event listener to the confirm button
+        document.getElementById('confirmButton').addEventListener('click', function() {
+            fetch(`/api/books/buy/${bookId}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `${sessionStorage.getItem('token')}`,
+                },
+                credentials: 'include',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Book bought successfully') {
+                    alert('Book purchased successfully!');
+                    window.location.href = '/browse';
+                } else {
+                    alert(data.msg || 'Error purchasing the book.');
+                }
+            })
+            .catch(error => {
+                console.error('Error buying the book:', error);
+                alert('Error purchasing the book.');
+            });
+        });
+    </script>
+    
+</body>
+</html>

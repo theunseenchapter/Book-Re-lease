@@ -185,7 +185,7 @@
                         <option value="rent">Rent</option>
                     </select>
                     <input type="number" id="bookPrice" name="bookPrice" placeholder="Price" required min="0">
-                    <input type="file" id="bookPhoto" name="bookPhoto" accept="image/*" required>
+                    <input type="file" id="bookPhoto" name="photo" accept="image/*" required>
                     <button class="short" type="submit">Post Book</button>
                 </form>
             </section>
@@ -212,48 +212,35 @@
             });
         });
 
+        console.log("the token: " + sessionStorage.getItem('token'));
         // Event listener for posting a new book
         const form = document.getElementById('postBookForm');
         form.addEventListener('submit', function(e) {
-            // Get form data
-            const formData = new FormData();
-            formData.append('title', document.getElementById('bookTitle').value.trim());
-            formData.append('author', document.getElementById('bookAuthor').value.trim());
-            formData.append('type', document.getElementById('bookType').value);
-            formData.append('price', parseFloat(document.getElementById('bookPrice').value));
-            formData.append('photo', document.getElementById('bookPhoto').files[0]);
-
-
-            // Validate file input
-            const fileInput = document.getElementById('bookPhoto');
-            if (!fileInput.files[0]) {
-                alert('Please upload an image.');
-                return;
+        e.preventDefault(); // Prevent default form submission
+        
+        const formData = new FormData(form); // Collect form data, including the file
+        
+        fetch('/api/books/create-Book', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'authorization': sessionStorage.getItem('token') // If authentication is required
             }
-
-            // Send POST request
-            fetch('/api/books/create-Book', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    authorization: localStorage.getItem('token')
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Book posted successfully!');
-                    document.getElementById('postBookForm').reset();
-                } else {
-                    alert(data.message || 'Failed to post the book.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            });
-            e.preventDefault();
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Book posted successfully!');
+                form.reset();
+            } else {
+                alert(data.message || 'Failed to post the book.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
         });
+    });
     </script>
 </body>
 </html>

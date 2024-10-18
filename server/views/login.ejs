@@ -181,8 +181,10 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    console.log("user id: " + data.user._id);
                     sessionStorage.setItem('user', JSON.stringify(data.user));
                     sessionStorage.setItem('token', data.token);
+                    sessionStorage.setItem('userId', data.user._id);
                     window.location.href = '/index';
                 } else {
                     alert(data.message);
